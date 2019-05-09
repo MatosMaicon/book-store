@@ -1,5 +1,5 @@
 ## :books: IAB ~ Book Store<br/>
-This a simple book store, development in NodeJS and ReactJS.
+> This a simple book store, built in Node.JS and React.JS :metal:
 
 ### Backend
 
