@@ -137,7 +137,7 @@ The **Order** feature has the following attributes:
 + createdAt
 + updatedAt
 
-The `id`, `status`, `total`, `createdAt` and `updatedAt` attributes are assigned by the Order Store API at creation time.
+The `id`, `status`, `createdAt` and `updatedAt` attributes are assigned by the Order Store API at creation time.
 
 ## Orders [/orders]
 
@@ -265,6 +265,7 @@ returns the deleted object in success.
 ## OrderW (object)
 + userId: 1 (required, number)
 + dateOrder: `2019-03-21` (required, string)
++ total: 530 (number)
 + itens: OrderItensW,OrderItensW (array[OrderItensW])
 
 

@@ -1,6 +1,8 @@
 ## :books: IAB ~ Book Store<br/>
 > This a simple book store, built in Node.JS and React.JS :metal:
 
+Diagrama: https://www.draw.io/?state=%7B%22folderId%22:%2218Q735sAQgOuNPzgigbFlmmsllZh9p8g-%22,%22action%22:%22create%22,%22userId%22:%22111075646661462664907%22%7D#G18LMPWjrw33_Elhnu0vMZfQSd1rZNNT0G
+
 ### Backend
 
 :wrench: Dependencies:<br/>

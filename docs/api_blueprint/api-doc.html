@@ -397,7 +397,7 @@ returns the deleted object in success.</p>
 <p>updatedAt</p>
 </li>
 </ul>
-<p>The <code>id</code>, <code>status</code>, <code>total</code>, <code>createdAt</code> and <code>updatedAt</code> attributes are assigned by the Order Store API at creation time.</p>
+<p>The <code>id</code>, <code>status</code>, <code>createdAt</code> and <code>updatedAt</code> attributes are assigned by the Order Store API at creation time.</p>
 <div id="orders-orders" class="resource"><h3 class="resource-heading">Orders <a href="#orders-orders" class="permalink">&nbsp;&para;</a></h3><div id="orders-orders-get" class="action get"><h4 class="action-heading"><div class="name">List Orders</div><a href="#orders-orders-get" class="method get">GET</a><code class="uri">/orders</code></h4><p>View all Orders.</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">http://localhost:3001/api/v1</span>/orders</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">bearer 5262d64b892e8d4341000001</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
   {
@@ -499,6 +499,7 @@ returns the deleted object in success.</p>
 <h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">http://localhost:3001/api/v1</span>/orders</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">userId</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
   "<span class="hljs-attribute">dateOrder</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-21"</span></span>,
+  "<span class="hljs-attribute">total</span>": <span class="hljs-value"><span class="hljs-number">530</span></span>,
   "<span class="hljs-attribute">itens</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">quantity</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
@@ -518,6 +519,9 @@ returns the deleted object in success.</p>
     </span>}</span>,
     "<span class="hljs-attribute">dateOrder</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">total</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
     </span>}</span>,
     "<span class="hljs-attribute">itens</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span>
@@ -714,6 +718,7 @@ returns the deleted object in success.</p>
 </dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">bearer 5262d64b892e8d4341000001</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">userId</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
   "<span class="hljs-attribute">dateOrder</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-21"</span></span>,
+  "<span class="hljs-attribute">total</span>": <span class="hljs-value"><span class="hljs-number">530</span></span>,
   "<span class="hljs-attribute">itens</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">quantity</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
@@ -733,6 +738,9 @@ returns the deleted object in success.</p>
     </span>}</span>,
     "<span class="hljs-attribute">dateOrder</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">total</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
     </span>}</span>,
     "<span class="hljs-attribute">itens</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span>
