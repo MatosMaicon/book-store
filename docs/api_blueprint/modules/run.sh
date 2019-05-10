@@ -1,0 +1,1 @@
+aglio -i main.apib  --no-theme-condense --theme-variables slate -s

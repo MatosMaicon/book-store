@@ -1,0 +1,161 @@
+
+# Group Users
+The **User** feature has the following attributes:
+
++ id
++ name
++ email
++ password
++ userType: **enum(1: admin, 2: client)**
++ active
++ createdAt
++ updatedAt
+
+The `id`, `createdAt` and `updatedAt` attributes are assigned by the User Store API at creation time.
+
+## Users [/users]
+
+### List Users [GET]
+View all Users.
+
++ Request
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[UserR,UserR])
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (UserError)
+
+### Create User [POST]
+Creates a new User object.
+
++ Request (application/json; charset=utf-8)
+    + Attributes (UserW)
+
+
++ Response 201 (application/json; charset=utf-8)
+    + Attributes (UserR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (UserError)
+
+## User [/users/{id}]
+
++ Parameters
+    + id: 1 (number) - The User `id`.
+
+### Show User [GET]
+Returns a specific User.
+
++ Request
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (UserR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (UserError)
+
+### Edit User [PUT]
+Edit User informed on **id**.
+
++ Request (application/json; charset=utf-8)
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
+    + Attributes (UserW)
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (UserR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (UserError)
+
+### Delete User [DELETE]
+Excludes a User. The current user must be an administrator, this
+returns the deleted object in success.
+
++ Request
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (UserR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (UserError)
+
+## Authentication [/login]
+
+### Login [POST]
+
++ Request (application/json; charset=utf-8)
+    + Attributes (LoginW)
+
+
++ Response 201 (application/json; charset=utf-8)
+    + Attributes (LoginR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (UserError)
+
+
+### Logout [GET]
+
++ Request
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (LogoutR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (UserError)
+
+
+
+
+
+
+
+
+# Data Structures
+
+## UserR (object)
++ id: 1 (number) - Unique Identifier
++ name: Admin (required, string)
++ email: admin@gmail.com (required, string)
++ password: iab123 (required, string)
++ userType: 1 (required, number)
++ active: true (required, boolean)
++ createdAt: `2019-03-21 20:16:43` (string) - Creation date
++ updatedAt: `2019-03-21 20:16:43` (string) - Edition date
+
+## UserW (object)
++ name: Admin (required, string)
++ email: admin@gmail.com (required, string)
++ password: iab123 (required, string)
++ userType: 1 (required, number)
++ active: true (required, boolean)
+
+## LoginR (object)
++ token: bearer 5262d64b892e8d4341000001 (required, string)
+
+## LogoutR (object)
++ message: Logout realizado com exito! (required, string)
+
+## LoginW (object)
++ email: admin@gmail.com (required, string)
++ password: iab123 (required, string)
+
+## UserError (object)
++ message: `Error message!` (string)
++ description: `Any description of the reason for the error ...` (string)

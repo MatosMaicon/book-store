@@ -1,0 +1,115 @@
+
+# Group Books
+The **Book** feature has the following attributes:
+
++ id
++ name
++ description
++ price
++ active
++ createdAt
++ updatedAt
+
+The `id`, `createdAt` and `updatedAt` attributes are assigned by the Book Store API at creation time.
+
+## Books [/books]
+
+### List Books [GET]
+View all Books.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[BookR,BookR])
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (BookError)
+
+### Create Book [POST]
+Creates a new Book object.
+
++ Request (application/json; charset=utf-8)
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
+    + Attributes (BookW)
+
+
++ Response 201 (application/json; charset=utf-8)
+    + Attributes (BookR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (BookError)
+
+## Book [/books/{id}]
+
++ Parameters
+    + id: 1 (number) - The Book `id`.
+
+### Show Book [GET]
+Returns a specific Book.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (BookR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (BookError)
+
+### Edit Book [PUT]
+Edit Book informed on **id**.
+
++ Request (application/json; charset=utf-8)
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
+    + Attributes (BookW)
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (BookR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (BookError)
+
+### Delete Book [DELETE]
+Excludes a Book. The current user must be an administrator, this
+returns the deleted object in success.
+
++ Request
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (BookR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (BookError)
+
+
+
+
+
+
+
+
+
+# Data Structures
+
+## BookR (object)
++ id: 1 (number) - Unique Identifier
++ name: A volta dos três tigres tristes (required, string) - Book name
++ description: `Vamos brincar de trava-língua? O livro conta a história de três tigres tristes caminham pela trilha de Trieste. Eles estão em busca dos pratos de trigo. No meio do caminho, encontram três patos de Petrópolis e acabam ficando sem trajes. Você pode até achar que conhece esta história, mas aposto que contada desta forma você nunca ouviu – nem leu! Aqui tem também a história do pato que pia… Mas, pato pia? Não sei, mas sei que só paga o pato quem pia.` (required, string) - Book description
++ price: 36.00 (required, number) - Book price
++ active: true (required, boolean)
++ createdAt: `2019-03-21 20:16:43` (string) - Creation date
++ updatedAt: `2019-03-21 20:16:43` (string) - Edition date
+
+## BookW (object)
++ name: A volta dos três tigres tristes (required, string) - Book name
++ description: `Vamos brincar de trava-língua? O livro conta a história de três tigres tristes caminham pela trilha de Trieste. Eles estão em busca dos pratos de trigo. No meio do caminho, encontram três patos de Petrópolis e acabam ficando sem trajes. Você pode até achar que conhece esta história, mas aposto que contada desta forma você nunca ouviu – nem leu! Aqui tem também a história do pato que pia… Mas, pato pia? Não sei, mas sei que só paga o pato quem pia.` (required, string) - Book description
++ price: 36.00 (required, number) - Book price
++ active: true (required, boolean)
+
+## BookError (object)
++ message: `Error message!` (string)
++ description: `Any description of the reason for the error ...` (string)

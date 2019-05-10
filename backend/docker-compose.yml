@@ -1,0 +1,21 @@
+version: '3'
+volumes:
+  dados:
+    external: true
+services:
+  db:
+    image: postgres:9.6
+    volumes:
+      # Volume dos dados
+      - dados:/var/lib/postgresql/data
+      # Scripts
+      # - ./docker/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+  app:
+    build: .
+    command: npm start
+    ports: 
+        - "3001:3000"
+    volumes:
+        - .:/usr/app

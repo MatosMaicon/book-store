@@ -1,0 +1,147 @@
+
+# Group Orders
+The **Order** feature has the following attributes:
+
++ id
++ userId
++ dateOrder
++ status: **enum(1: pending, 2: payment, 3: canceled)**
++ total
++ createdAt
++ updatedAt
+
+The `id`, `status`, `total`, `createdAt` and `updatedAt` attributes are assigned by the Order Store API at creation time.
+
+## Orders [/orders]
+
+### List Orders [GET]
+View all Orders.
+
++ Request
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[OrderR,OrderR])
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (OrderError)
+
+### Create Order [POST]
+Creates a new Order object.
+
++ Request (application/json; charset=utf-8)
+    + Attributes (OrderW)
+
+
++ Response 201 (application/json; charset=utf-8)
+    + Attributes (OrderR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (OrderError)
+
+## Order [/orders/{id}]
+
++ Parameters
+    + id: 1 (number) - The Order `id`.
+
+### Show Order [GET]
+Returns a specific Order.
+
++ Request
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (OrderR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (OrderError)
+
+### Edit Order [PUT]
+Edit Order informed on **id**.
+
++ Request (application/json; charset=utf-8)
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
+    + Attributes (OrderW)
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (OrderR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (OrderError)
+
+### Delete Order [DELETE]
+Excludes a Order. The current user must be an administrator, this
+returns the deleted object in success.
+
++ Request
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (OrderR)
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (OrderError)
+
+
+
+## Filters [/orders{?userId,status,dateOrder}]
++ Parameters
+    + userId: 1 (number)
+    + status: 1 (number)
+    + dateOrder: `2019-05-10` (string)
+
+### Orders Filters [GET]
++ Request
+    + Headers
+
+            Authorization: bearer 5262d64b892e8d4341000001
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[OrderR])
+
++ Response 400 (application/json; charset=utf-8)
+    + Attributes (OrderError)
+
+
+
+
+
+# Data Structures
+
+## OrderItensR (object)
++ quantity: 5 (required, number)
++ book: BookR (array[BookR])
+
+## OrderItensW (object)
++ quantity: 5 (required, number)
++ bookId: 1 (required, number)
+
+## OrderR (object)
++ id: 1 (number) - Identificador Unico
++ userId: 1 (required, number)
++ dateOrder: `2019-03-21` (required, string)
++ status: 1 (required, number)
++ total: 530 (required, number)
++ itens: OrderItensR,OrderItensR (array[OrderItensR])
++ createdAt: `2019-03-21 20:16:43` (string) - Creation date
++ updatedAt: `2019-03-21 20:16:43` (string) - Edition date
+
+## OrderW (object)
++ userId: 1 (required, number)
++ dateOrder: `2019-03-21` (required, string)
++ itens: OrderItensW,OrderItensW (array[OrderItensW])
+
+
+
+## OrderError (object)
++ message: `Error message!` (string)
++ description: `Any description of the reason for the error ...` (string)

@@ -1,0 +1,1 @@
+hercule /usr/app/docs/api_blueprint/modules/main.apib -o /usr/app/docs/api_blueprint/api.apib && aglio -i /usr/app/docs/api_blueprint/api.apib  --no-theme-condense --theme-variables slate -o api-doc.html
