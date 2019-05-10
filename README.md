@@ -1,21 +1,21 @@
-# book-store
-This a simple book store, development in NodeJS and ReactJS.
+## :books: IAB ~ Book Store<br/>
+> This a simple book store, built in Node.JS and React.JS :metal:
 
-# Backend
+### Backend
 
-Dependencies:
-* express (https://expressjs.com/)
-* sequelize (http://docs.sequelizejs.com/)
+:wrench: Dependencies:<br/>
+* [express](https://expressjs.com/)
+* [sequelize](http://docs.sequelizejs.com/)
 * pg
 * pg-hstore
 * nodemon
 * sequelize-cli
 
-# Frontend
+### Frontend
 
-Dependencies:
+:hammer: Dependencies:<br/>
 * react (https://reactjs.org)
-* create-react-app (https://github.com/facebook/create-react-app)
+* [create-react-app](https://github.com/facebook/create-react-app)
 * axios
 * react-router-dom
-* redux (https://redux.js.org/basics/usage-with-react)
+* [redux](https://redux.js.org/basics/usage-with-react)
