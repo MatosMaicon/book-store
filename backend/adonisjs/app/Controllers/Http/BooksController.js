@@ -13,7 +13,6 @@ class BooksController {
   async index () {
     const books = await Book
       .query()
-      .with('items')
       .fetch()        
 
     return books.toJSON()

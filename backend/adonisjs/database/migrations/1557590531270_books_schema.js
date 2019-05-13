@@ -11,6 +11,7 @@ class BooksSchema extends Schema {
       table.string('name', 80).notNullable()
       table.text('description')
       table.float('price')
+      table.boolean('active')
       
       table.timestamps()
       table.timestamp('deleted_at')
