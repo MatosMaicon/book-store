@@ -18,6 +18,7 @@
 :hammer: Dependencies:<br/>
 * react (https://reactjs.org)
 * [create-react-app](https://github.com/facebook/create-react-app)
+* [react bootstrap](https://reactstrap.github.io)
 * axios
 * react-router-dom
 * [redux](https://redux.js.org/basics/usage-with-react)
