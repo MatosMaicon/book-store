@@ -16,8 +16,9 @@
 ### Frontend
 
 :hammer: Dependencies:<br/>
-* react (https://reactjs.org)
+* [react](https://reactjs.org)
 * [create-react-app](https://github.com/facebook/create-react-app)
-* axios
-* react-router-dom
+* [react bootstrap](https://reactstrap.github.io)
+* [axios](https://github.com/axios/axios)
+* [react-router-dom](https://reacttraining.com/react-router/web/guides/quick-start)
 * [redux](https://redux.js.org/basics/usage-with-react)
