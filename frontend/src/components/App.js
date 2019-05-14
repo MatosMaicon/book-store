@@ -6,7 +6,7 @@ import store from '../store';
 
 import Header from './shared/Header';
 import ProductList from './ProductList';
-import ProductDetail from './ProductDetail';
+import ProductDetailContainer from './ProductDetailContainer';
 
 import './App.css';
 
@@ -17,7 +17,7 @@ function App() {
         <Header/>
         <Container>
             <Route exact path='/' component={ProductList} />
-            <Route exact path='/product/:id/detail' component={ProductDetail} />
+            <Route exact path='/product/:id/detail' component={ProductDetailContainer} />
         </Container>
       </Provider>
     </Router>
