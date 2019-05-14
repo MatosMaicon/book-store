@@ -10,12 +10,12 @@ export default class ProductDetail extends React.Component {
     this.state = {
       product: {}
     };
+
   }
   
   async componentDidMount() {
-    const { match: { params } } = this.props;
     try {
-      const product = await Api().byId(params.id);
+      const product = await Api().byId(this.props.id);
       this.setState({ product });
 
     } catch (error) {
@@ -28,12 +28,12 @@ export default class ProductDetail extends React.Component {
     return (
       <div className="m-3">
         <Media>
-          <Media left href="#" className="mr-3">
-            <Media object src={`https://picsum.photos/id/${id}/200/250?grayscale`} height="250px" width="200px" alt="Generic placeholder image" />
-            <div>
-              <Button className="w-100 mt-1">Adicionar</Button>
-            </div>
-          </Media>
+          <div className="mr-3" style={{ width: '200px' }}>
+            <Media left href="#">
+              <Media object src={`https://picsum.photos/id/${id}/200/250?grayscale`} height="250px" width="200px" alt="Generic placeholder image" />
+            </Media>
+            <Button className="w-100 mt-1">Adicionar</Button>
+          </div>
           <Media body>
             <Media heading>
               {name}
