@@ -2,7 +2,7 @@ import React from 'react';
 // import axios from 'axios';
 
 import Api from '../../services/api';
-import ProductContainer from '../ProductContainer';
+import ProductItem from '../ProductItem';
 
 export default class ProductList extends React.Component {
   constructor(props) {
@@ -24,12 +24,19 @@ export default class ProductList extends React.Component {
   }
 
   render() {
+    const { products } = this.state;
     return (
       <ul className="list-unstyled d-inline-flex flex-wrap">
         {
-          this.state.products.length && this.state.products.map(({ id, name, price }) => 
-            <ProductContainer id={id} name={name} price={price} photo={`https://picsum.photos/id/${id}/200/250?grayscale`} key={id} />
-          )
+          products.length ? products.map(product => 
+            <ProductItem
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              photo={`https://picsum.photos/id/${product.id}/200/250?grayscale`}
+              key={product.id} />
+          ) :
+          null /* put loader in some moment */
         }
       </ul>
     )
