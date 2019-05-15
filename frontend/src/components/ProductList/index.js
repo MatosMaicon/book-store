@@ -1,8 +1,7 @@
 import React from 'react';
-// import axios from 'axios';
 
 import Api from '../../services/api';
-import ProductItem from '../ProductItem';
+import ProductCard from '../containers/product-card';
 
 export default class ProductList extends React.Component {
   constructor(props) {
@@ -29,7 +28,7 @@ export default class ProductList extends React.Component {
       <ul className="list-unstyled d-inline-flex flex-wrap">
         {
           products.length ? products.map(product => 
-            <ProductItem
+            <ProductCard
               id={product.id}
               name={product.name}
               price={product.price}
