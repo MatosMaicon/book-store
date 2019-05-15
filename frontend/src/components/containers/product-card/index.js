@@ -15,7 +15,7 @@ import './style.css';
 const ProductCard = ({ product, addProductToCart }) => {
   return (
     <li className="m-4">
-      <Card>
+      <Card className="card-item">
         <CardImg width="100%" src={product.photo} alt="Card image cap" />
         <CardBody>
           <CardTitle>{product.name}</CardTitle>
