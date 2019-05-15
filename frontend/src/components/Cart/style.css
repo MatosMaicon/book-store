@@ -1,0 +1,8 @@
+.mini-cart {
+  position: absolute !important;
+  right: 10px;
+  width: 400px !important;
+  box-shadow: 1px 1px 4px -1px #c7c7c7;
+  padding: 1rem;
+  z-index: 9999;
+}
