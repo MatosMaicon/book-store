@@ -31,21 +31,21 @@ class Cart extends React.Component {
           onMouseEnter={this.handleMouseHover}
           onMouseLeave={this.handleMouseHover}>
           <span>Carrinho <strong>{this.props.products.length ? this.props.products.length : 0}</strong></span>
+          {
+            this.state.isHovering &&
+            <Card className="mini-cart">
+              <ul className="list-unstyled">
+                {
+                  this.props.products.length ? 
+                    this.props.products.map(product => 
+                    <li key={product.id}>{product.qty}x - {product.name} - R${product.price}</li>
+                    ) : 
+                    <li>Seu carrinho está vazio.</li>
+                }
+              </ul>
+            </Card>
+          }
         </NavLink>
-        {
-          this.state.isHovering &&
-          <Card className="mini-cart">
-            <ul className="list-unstyled">
-              {
-                this.props.products.length ? 
-                  this.props.products.map(product => 
-                  <li>{product.qty}x - {product.name} - R${product.price}</li>
-                  ) : 
-                  <li>Seu carrinho está vazio.</li>
-              }
-            </ul>
-          </Card>
-        }
       </>
     );
   }
