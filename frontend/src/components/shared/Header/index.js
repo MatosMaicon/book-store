@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -11,7 +12,7 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 
-import Cart from '../../Cart';
+import Cart from '../../cart';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -31,7 +32,9 @@ export default class Header extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Book Store</NavbarBrand>
+          <NavbarBrand tag="div">
+            <Link to={'/'} className="nav-link">Book Store</Link>
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

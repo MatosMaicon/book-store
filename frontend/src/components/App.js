@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import store from '../store';
 
-import Header from './shared/Header';
-import ProductList from './ProductList';
+import Header from './shared/header';
+import ProductList from './product-list';
 import ProductDetail from './containers/product-detail';
 
 import './App.css';
@@ -16,8 +16,8 @@ function App() {
       <Provider store={store}>
         <Header/>
         <Container>
-            <Route exact path='/' component={ProductList} />
-            <Route exact path='/product/:id/detail' component={ProductDetail} />
+          <Route exact path='/' component={ProductList} />
+          <Route exact path='/product/:id/detail' component={ProductDetail} />
         </Container>
       </Provider>
     </Router>
