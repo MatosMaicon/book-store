@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Media, Button } from 'reactstrap';
+import { isEmpty } from 'lodash';
 
 import * as ActionsCart from '../../../store/actions/cart';
 
 import Api from '../../../services/api';
+import photo from '../../../services/photo-random';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -15,10 +17,21 @@ class ProductDetail extends React.Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { match: { params } } = this.props;
+    this.fetchProductDetail(params.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      const { match: { params } } = nextProps
+      this.fetchProductDetail(params.id);
+    }
+  }
+
+  async fetchProductDetail(id) {
     try {
-      const product = await Api().byId(params.id);
+      const product = await Api.byId(id);
       this.setState({ product });
 
     } catch (error) {
@@ -26,34 +39,34 @@ class ProductDetail extends React.Component {
     }
   }
 
-  returnUrl(id) {
-    return `https://picsum.photos/id/${id}/200/250?grayscale`;
-  }
-
   render() {
     const { id, name, description, price } = this.state.product;
     return (
       <div className="m-3">
-        <Media>
-          <div className="mr-3" style={{ width: '200px' }}>
-            <Media left href="#">
-              <Media object src={this.returnUrl(id)} height="250px" width="200px" alt="Generic placeholder image" />
-            </Media>
-            <Button className="w-100 mt-1" onClick={() => this.props.addProductToCart({ id, name, qty: 1, price })}>Adicionar</Button>
-          </div>
-          <Media body>
-            <Media heading>
-              {name}
-            </Media>
-            <div className="w-100 d-flex justify-content-between align-items-center">
-              <span>Rating: 1/5</span>
-              <h3>R$ {typeof price === 'number' ? price.toFixed(2) : price}</h3>
+        {
+          !isEmpty(this.state.product) &&
+          <Media>
+            <div className="mr-3" style={{ width: '200px' }}>
+              <Media left href="#">
+                <Media object src={photo(id)} height="250px" width="200px" alt="Generic placeholder image" />
+              </Media>
+              <Button className="w-100 mt-1" onClick={() => this.props.addProductToCart({ id, name, qty: 1, price })}>Adicionar</Button>
+              <Button className="w-100 mt-1" onClick={() => this.props.removeProductToCart(id)}>Remover</Button>
             </div>
-            <div className="text-justify mt-3">
-              {description}  
-            </div>
+            <Media body>
+              <Media heading>
+                {name}
+              </Media>
+              <div className="w-100 d-flex justify-content-between align-items-center">
+                <span>Rating: 1/5</span>
+                <h3>R$ {typeof price === 'number' ? price.toFixed(2) : price}</h3>
+              </div>
+              <div className="text-justify mt-3">
+                {description}  
+              </div>
+            </Media>
           </Media>
-        </Media>
+        }
       </div>
     )
   }
@@ -64,7 +77,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: product => dispatch(ActionsCart.addProductToCart(product)) 
+  addProductToCart: product => dispatch(ActionsCart.addProductToCart(product)), 
+  removeProductToCart: id => dispatch(ActionsCart.removeProductToCart(id)) 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
