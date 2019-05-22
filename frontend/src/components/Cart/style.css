@@ -7,3 +7,10 @@
   padding: 1rem;
   z-index: 9999;
 }
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
