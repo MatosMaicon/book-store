@@ -11,6 +11,9 @@ export default function cart(state = [], action) {
         return [ ...newstate, nproduct ];
       }
       return [ ...state, action.product ];
+    case 'DEL_PRODUCT_CART':
+      const newstate = state.filter(product => product.id !== action.id);
+      return [ ...newstate ];
     default:
       return state;
   }

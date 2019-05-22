@@ -5,9 +5,9 @@ export function addProductToCart(product) {
   };
 }
 
-export function removeProductToCart(product) {
+export function removeProductToCart(id) {
   return {
     type: 'DEL_PRODUCT_CART',
-    product
+    id
   };
 }

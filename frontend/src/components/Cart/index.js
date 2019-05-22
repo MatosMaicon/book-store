@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { NavLink, Card } from 'reactstrap';
 
 import './style.css';
@@ -28,6 +29,7 @@ class Cart extends React.Component {
     return (
       <>
         <NavLink
+          tag="span"
           onMouseEnter={this.handleMouseHover}
           onMouseLeave={this.handleMouseHover}>
           <span>Carrinho <strong>{this.props.products.length ? this.props.products.length : 0}</strong></span>
@@ -38,7 +40,13 @@ class Cart extends React.Component {
                 {
                   this.props.products.length ? 
                     this.props.products.map(product => 
-                    <li key={product.id}>{product.qty}x - {product.name} - R${product.price}</li>
+                    <li
+                      className="d-flex justify-content-between align-items-end"
+                      key={product.id}>
+                        <span>{product.qty}x</span>
+                        <Link to={`/product/${product.id}/detail`} className="truncate">{product.name}</Link>
+                        <span>R${product.price}</span>
+                    </li>
                     ) : 
                     <li>Seu carrinho está vazio.</li>
                 }

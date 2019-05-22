@@ -14,7 +14,7 @@ export default class ProductList extends React.Component {
 
   async componentDidMount() {
     try {
-      const products = await Api().list();
+      const products = await Api.list();
       this.setState({ products });
 
     } catch (error) {
@@ -29,11 +29,9 @@ export default class ProductList extends React.Component {
         {
           products.length ? products.map(product => 
             <ProductCard
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              photo={`https://picsum.photos/id/${product.id}/200/250?grayscale`}
-              key={product.id} />
+              key={product.id}
+              {...product}
+            />
           ) :
           null /* put loader in some moment */
         }
