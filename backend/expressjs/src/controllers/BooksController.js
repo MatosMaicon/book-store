@@ -7,8 +7,6 @@ module.exports = {
 
             return res.json(books)
         } catch(err){
-            console.log(err)
-
             return res.status(400).json({erro: err})
         }
     },
@@ -19,8 +17,6 @@ module.exports = {
             
             return res.json(book)
         }catch(err){
-            console.log(err)
-
             return res.status(400).json({erro: err})
         }
     },
@@ -28,15 +24,13 @@ module.exports = {
     async update(req, res){
         const book = await Book.findByPk(req.params.id)
         if(book === null){
-            return res.status(400).json({message: "Livro não encontrado!"})
+            return res.status(400).json({message: "Livro not found!"})
         }
 
         try{
             await book.update(req.body)
             return res.json(book)
         }catch(err){
-            console.log(err)
-
             return res.status(400).json({erro: err})
         }
     },
@@ -45,7 +39,7 @@ module.exports = {
         const book = await Book.findByPk(req.params.id)
 
         if(book === null){
-            return res.status(400).json({message: "Livro não encontrado!"})
+            return res.status(400).json({message: "Livro not found!"})
         }
 
         try{
@@ -53,8 +47,6 @@ module.exports = {
 
             return res.json(book)
         }catch(err){
-            console.log(err)
-
             return res.status(400).json({erro: err})
         }
     }

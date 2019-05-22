@@ -9,4 +9,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 require('./config/routes')(app)
 
-app.listen(3000)
+app.listen(3001, () => {
+  console.log('Server started on port 3001')
+})
