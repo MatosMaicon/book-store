@@ -40,7 +40,7 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-    const { id, name, description, price } = this.state.product;
+    const { id, name, description, price, image } = this.state.product;
     return (
       <div className="m-3">
         {
@@ -48,7 +48,7 @@ class ProductDetail extends React.Component {
           <Media>
             <div className="mr-3" style={{ width: '200px' }}>
               <Media left href="#">
-                <Media object src={photo(id)} height="250px" width="200px" alt="Generic placeholder image" />
+                <Media object src={photo(image)} height="250px" width="200px" alt="Generic placeholder image" />
               </Media>
               <Button className="w-100 mt-1" onClick={() => this.props.addProductToCart({ id, name, qty: 1, price })}>Adicionar</Button>
               <Button className="w-100 mt-1" onClick={() => this.props.removeProductToCart(id)}>Remover</Button>

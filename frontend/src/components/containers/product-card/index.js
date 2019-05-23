@@ -18,7 +18,7 @@ const ProductCard = ({ product, addProductToCart }) => {
   return (
     <li className="m-4">
       <Card className="card-item">
-        <CardImg width="100%" src={photo(product.id)} alt="Card image cap" />
+        <CardImg width="100%" src={photo(product.image)} alt="Card image cap" />
         <CardBody>
           <CardTitle>{product.name}</CardTitle>
           <CardSubtitle>R$ {typeof product.price === 'number' ? product.price.toFixed(2) : product.price}</CardSubtitle>
