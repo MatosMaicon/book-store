@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING
         }
     },{
-        getterMethods: {
-            imageUrl: function () {
-                return `${process.env.APP_HOST}:${process.env.APP_PORT}/images/book/${this.getDataValue('image')}`
-            }
-        },
+        // getterMethods: {
+        //     imageUrl: function () {
+        //         return `${process.env.APP_HOST}:${process.env.APP_PORT}/images/book/${this.getDataValue('image')}`
+        //     }
+        // },
     });
 
     Book.associate = function (models) {

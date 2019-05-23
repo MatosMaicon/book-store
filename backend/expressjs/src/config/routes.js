@@ -10,7 +10,7 @@ module.exports = app => {
     app.group("/api/v1/", (router) => { 
         router.group("/books", (router) => {
             router.get('/', BooksController.index);
-            //router.post('/', authMiddleware, BooksController.store);
+            router.get('/:id', BooksController.show);
             router.post('/', [authMiddleware, uploadMiddleware('book').single('image')], BooksController.store);
             router.put('/:id', [authMiddleware, uploadMiddleware('book').single('image')], BooksController.update);    
             router.delete('/:id', authMiddleware, BooksController.destroy);    

@@ -3,6 +3,7 @@ require("dotenv").config({
 });
 
 const express = require('express')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 require('express-group-routes')
 
@@ -15,6 +16,8 @@ class AppController {
   }
 
   middlewares() {
+    this.express.use(cors({ origin: process.env.FRONT_HOST }))
+
     this.express.use(bodyParser.json())
     this.express.use(bodyParser.urlencoded({ extended: false }))
 

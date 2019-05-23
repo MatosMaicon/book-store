@@ -5,9 +5,21 @@ const { Book } = require('../models')
 module.exports = {
     async index(req, res) {
         try {
-            const books = await Book.findAll()
+            const books = await Book.findAll({
+                //attributes: ['name', 'description', 'price', 'active','image']
+            })
 
             return res.json(books)
+        } catch(err){
+            return res.status(400).json({erro: err})
+        }
+    },
+
+    async show(req, res) {
+        try {
+            const book = await Book.findByPk(req.params.id)
+
+            return res.json(book)
         } catch(err){
             return res.status(400).json({erro: err})
         }
