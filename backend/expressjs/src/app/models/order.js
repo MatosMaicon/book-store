@@ -1,7 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define('Order', {
-    user_id: {
+    userId: {
+      field: 'user_id',
       allowNull: false,
       type: DataTypes.INTEGER
     },
@@ -15,11 +16,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DOUBLE
     },
-    date_order: {
+    dateOrder: {
+      field: 'date_order',
       allowNull: false,
       type: DataTypes.DATEONLY
-    },
-  }, { underscored: true });
+    }
+  }, {});
 
   Order.prototype.teste = async function () {
     //função de classe

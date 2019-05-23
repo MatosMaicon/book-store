@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { Book } = require('../models')
 
 module.exports = {
@@ -13,8 +15,7 @@ module.exports = {
 
     async store(req, res){
         try{
-            const book = await Book.create(req.body)
-            
+            const book = await Book.create({...req.body, image: req.file.filename})
             return res.json(book)
         }catch(err){
             return res.status(400).json({erro: err})
@@ -26,9 +27,19 @@ module.exports = {
         if(book === null){
             return res.status(400).json({message: "Livro not found!"})
         }
-
+        
         try{
-            await book.update(req.body)
+            let attributes = req.body
+            //apaga imagem antiga se uma nova for passada
+            if (!!req.file){
+                fs.unlink(`./public/images/book/${book.image}`, (err) => {
+                    if (err) throw err;
+                });
+
+                attributes = {...attributes, image: req.file.filename}
+            }
+
+            await book.update(attributes)
             return res.json(book)
         }catch(err){
             return res.status(400).json({erro: err})
@@ -44,6 +55,11 @@ module.exports = {
 
         try{
             await book.destroy()
+
+            //apaga imagem
+            fs.unlink(`./public/images/book/${book.image}`, (err) => {
+                if (err) throw err;
+            });
 
             return res.json(book)
         }catch(err){

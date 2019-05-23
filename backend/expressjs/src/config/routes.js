@@ -1,16 +1,18 @@
-const AuthController = require('../src/controllers/AuthController')
-const BooksController = require('../src/controllers/BooksController')
-const UsersController = require('../src/controllers/UsersController')
-const OrdersController = require('../src/controllers/OrdersController')
+const AuthController = require('../app/controllers/AuthController')
+const BooksController = require('../app/controllers/BooksController')
+const UsersController = require('../app/controllers/UsersController')
+const OrdersController = require('../app/controllers/OrdersController')
 
-const authMiddleware = require('../src/middlewares/auth')
+const authMiddleware = require('../app/middlewares/auth')
+const uploadMiddleware = require('../app/middlewares/upload')
 
 module.exports = app => {
     app.group("/api/v1/", (router) => { 
         router.group("/books", (router) => {
             router.get('/', BooksController.index);
-            router.post('/', authMiddleware, BooksController.store);
-            router.put('/:id', authMiddleware, BooksController.update);    
+            //router.post('/', authMiddleware, BooksController.store);
+            router.post('/', [authMiddleware, uploadMiddleware('book').single('image')], BooksController.store);
+            router.put('/:id', [authMiddleware, uploadMiddleware('book').single('image')], BooksController.update);    
             router.delete('/:id', authMiddleware, BooksController.destroy);    
         })
 

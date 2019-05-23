@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             type: DataTypes.STRING
         },
-        user_type: {
+        userType: {
+            field: 'user_type',
             allowNull: false,
             type: DataTypes.ENUM,
             values: ['admin', 'client']
@@ -26,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: true,
             type: DataTypes.BOOLEAN
         },
-    },{ underscored: true });
+    },{});
 
     User.associate = function (models) {
         User.hasMany(models.Order)

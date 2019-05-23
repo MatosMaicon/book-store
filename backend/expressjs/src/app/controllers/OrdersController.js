@@ -5,9 +5,10 @@ module.exports = {
     async index(req, res) {
         try {
             const orders = await Order.findAll({
-                include: [{
-                    model: Item, include: [{ model: Book }]
-                }]
+                include: [
+                    {model: Item, include: [{ model: Book }]}, 
+                    {model: User}
+                ]
             })
 
             return res.json(orders)

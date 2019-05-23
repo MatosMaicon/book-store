@@ -2,11 +2,13 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Item = sequelize.define('Item',{
-        book_id: {
+        bookId: {
+            field: 'book_id',
             allowNull: false,
             type: DataTypes.INTEGER
         },
-        order_id: {
+        orderId: {
+            field: 'order_id',
             allowNull: false,
             type: DataTypes.INTEGER
         },
@@ -14,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             type: DataTypes.INTEGER
         },
-    },{ underscored: true });
+    },{});
 
     Item.associate = function (models) {
         Item.belongsTo(models.Book)
