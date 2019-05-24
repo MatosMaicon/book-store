@@ -13,7 +13,8 @@ class UsersController {
 
     async store(req, res){
         try{
-            const user = await User.create(User.params(req.body))
+            const params = await User.params(req.body)
+            const user = await User.create(params)
             
             user.password = undefined;
             return res.json(user)
@@ -29,7 +30,8 @@ class UsersController {
         }
 
         try{
-            await user.update(User.params(req.body))
+            const params = await User.params(req.body)
+            await user.update(params)
 
             user.password = undefined;
             return res.json(user)

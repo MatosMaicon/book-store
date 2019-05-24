@@ -1,4 +1,5 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 'use strict';
 module.exports = (sequelize, DataTypes) => {
@@ -30,6 +31,12 @@ module.exports = (sequelize, DataTypes) => {
     },{});
     User.associate = function (models) {
         User.hasMany(models.Order)
+    };
+
+    User.prototype.generateToken = async function () {
+        return jwt.sign({ id: this.id }, process.env.APP_SECRET, {
+            expiresIn: 86400,
+        });
     };
 
     //METHODS CLASS

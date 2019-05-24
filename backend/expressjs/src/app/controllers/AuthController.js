@@ -1,5 +1,4 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 const { User } = require('../models')
 
@@ -14,15 +13,14 @@ class AuthController {
                 return res.status(400).send({ error: 'User not found' });
 
             if(!await bcrypt.compare(password, user.password))
-                return res.status(400).send({ error: 'Invalid password' });
+                return res.status(401).send({ error: 'Invalid password' });
 
             user.password = undefined;
 
-            const token = jwt.sign({ id: user.id }, process.env.APP_SECRET, {
-                expiresIn: 86400,
+            res.send({ 
+                user, 
+                token: await user.generateToken() 
             });
-
-            res.send({ user, token });
         } catch(err){
             return res.status(400).json({erro: err})
         }
