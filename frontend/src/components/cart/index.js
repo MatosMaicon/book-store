@@ -17,7 +17,7 @@ const Cart = ({ products, removeProductToCart }) => {
         <span>Carrinho <strong>{products.length ? products.length : 0}</strong></span>
         {
           isHovering &&
-          <Card className="mini-cart">
+          <Card className={isHovering ? 'mini-cart in' : 'mini-cart out'}>
             <ul className="list-unstyled">
               {
                 products.length ? 
