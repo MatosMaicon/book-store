@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const { Book } = require('../models')
 
-module.exports = {
+class BooksController {
     async index(req, res) {
         try {
             const books = await Book.findAll({
@@ -13,7 +13,7 @@ module.exports = {
         } catch(err){
             return res.status(400).json({erro: err})
         }
-    },
+    }
 
     async show(req, res) {
         try {
@@ -23,7 +23,7 @@ module.exports = {
         } catch(err){
             return res.status(400).json({erro: err})
         }
-    },
+    }
 
     async store(req, res){
         try{
@@ -32,7 +32,7 @@ module.exports = {
         }catch(err){
             return res.status(400).json({erro: err})
         }
-    },
+    }
 
     async update(req, res){
         const book = await Book.findByPk(req.params.id)
@@ -56,7 +56,7 @@ module.exports = {
         }catch(err){
             return res.status(400).json({erro: err})
         }
-    },
+    }
 
     async destroy(req, res){
         const book = await Book.findByPk(req.params.id)
@@ -79,3 +79,5 @@ module.exports = {
         }
     }
 }
+
+module.exports = new BooksController();

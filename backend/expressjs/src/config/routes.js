@@ -27,6 +27,7 @@ module.exports = app => {
             router.use(authMiddleware)
 
             router.get('/', OrdersController.index);
+            router.get('/:id', OrdersController.index);
             router.post('/', OrdersController.store);
             router.put('/:id', OrdersController.update);    
             router.delete('/:id', OrdersController.destroy);    

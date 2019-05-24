@@ -1,7 +1,7 @@
 const db = require('../models')
 const { Order, Item, User, Book } = require('../models')
 
-module.exports = {
+class OrdersController {
     async index(req, res) {
         try {
             const orders = await Order.findAll({
@@ -15,7 +15,17 @@ module.exports = {
         } catch(err){
             return res.status(400).json({erro: err})
         }
-    },
+    }
+
+    async show(req, res) {
+        try {
+            const order = await Order.findByPk(req.params.id)
+
+            return res.json(order)
+        } catch(err){
+            return res.status(400).json({erro: err})
+        }
+    }
 
     async store(req, res){
         const transaction = await db.sequelize.transaction();
@@ -32,7 +42,7 @@ module.exports = {
             await transaction.rollback();
             return res.status(400).json({erro: err})
         }
-    },
+    }
 
     async update(req, res){
         const order = await Order.findByPk(req.params.id)
@@ -61,7 +71,7 @@ module.exports = {
             await transaction.rollback();
             return res.status(400).json({erro: err})
         }
-    },
+    }
 
     async destroy(req, res){
         const order = await Order.findByPk(req.params.id)
@@ -78,3 +88,5 @@ module.exports = {
         }
     }
 }
+
+module.exports = new OrdersController();

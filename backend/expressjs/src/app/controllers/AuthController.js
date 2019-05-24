@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const { User } = require('../models')
 
-module.exports = {
+class AuthController {
     async authenticate(req, res) {
         try {
             const { email, password } = req.body;
@@ -26,5 +26,7 @@ module.exports = {
         } catch(err){
             return res.status(400).json({erro: err})
         }
-    },
+    }
 }
+
+module.exports = new AuthController();

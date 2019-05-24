@@ -28,10 +28,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN
         },
     },{});
-
     User.associate = function (models) {
         User.hasMany(models.Order)
     };
+
+    //METHODS CLASS
+    User.params = async function (body){
+        return {name, email, password, userType, active} = body
+    }
 
     //Hooks / Callbacks
     User.beforeSave(async (user, options) => {
