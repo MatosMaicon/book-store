@@ -9,7 +9,7 @@ import ProductList from './product-list';
 import ProductDetail from './containers/product-detail';
 import BookList from './book-list';
 import BookForm from './book-form';
-import Message from '../components/shared/message'
+import Message from './shared/message'
 
 import './App.css';
 
