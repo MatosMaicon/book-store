@@ -9,6 +9,7 @@ import ProductList from './product-list';
 import ProductDetail from './containers/product-detail';
 import BookList from './book-list';
 import BookForm from './book-form';
+import Message from '../components/shared/message'
 
 import './App.css';
 
@@ -24,6 +25,7 @@ function App() {
           <Route exact path='/books/new' component={BookForm} />
           <Route exact path='/books/edit/:id' component={BookForm} />
         </Container>
+        <Message />
       </Provider>
     </Router>
   );

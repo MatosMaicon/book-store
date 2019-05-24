@@ -30,6 +30,17 @@ const api = {
       }
     })
   },
+
+  bookDelete: async (id) => {
+    try {
+      await instance.delete(`books/${id}`)
+      return true;
+    } catch (error) {
+      console.log(error.response);
+      return false;
+    }
+  },
+
   list: () => {
     return new Promise( async (resolve, reject) => {
       try {

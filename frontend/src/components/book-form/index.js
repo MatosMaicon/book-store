@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-//import { toastr } from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr'
 import api from '../../services/api'
 import { Link } from 'react-router-dom';
 
@@ -18,15 +18,15 @@ export default function StudentList(props) {
     });
 
     useEffect(() => {
-      if (!!id){
-        api.byId(id).then(response => {
-          setForm({...response})
-        })
-        .catch(err => {
-          //toastr.error('Error', `${err}`)
-          props.history.push('/books')
-        })
-      }
+        if (!!id){
+            api.byId(id).then(response => {
+                setForm({...response})
+            })
+            .catch(err => {
+                toastr.error('Error', `${err}`)
+                props.history.push('/books')
+            })
+        }
     }, []);
     
 
@@ -68,11 +68,11 @@ export default function StudentList(props) {
 
         await api.bookSave(form, id)
         .then(resp => {
-            //toastr.success('Sucesso', 'Operação Realizada com sucesso.')
+            toastr.success('Sucesso', 'Operação Realizada com sucesso.')
             props.history.push('/books')
         })
         .catch(err => {
-            //toastr.error('Error', `${err}`)
+            toastr.error('Error', `${err}`)
         })   
     }
 
