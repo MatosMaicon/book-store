@@ -1,41 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Api from '../../services/api';
 import ProductCard from '../containers/product-card';
 
-export default class ProductList extends React.Component {
-  constructor(props) {
-    super(props);
+const ProductList = () => {
+  const [products, setProducts] = useState([]);
 
-    this.state = {
-      products: []
-    };
-  }
-
-  async componentDidMount() {
-    try {
-      const products = await Api.list();
-      this.setState({ products });
-
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await Api.list();
+      setProducts(response);
     }
-  }
+    fetchData();
+  }, []);
 
-  render() {
-    const { products } = this.state;
-    return (
-      <ul className="list-unstyled d-inline-flex flex-wrap">
-        {
-          products.length ? products.map(product => 
-            <ProductCard
-              key={product.id}
-              {...product}
-            />
-          ) :
-          null /* put loader in some moment */
-        }
-      </ul>
-    )
-  }
+  return (
+    <ul className="list-unstyled d-inline-flex flex-wrap">
+      {
+        products.length ? products.map(product => 
+          <ProductCard
+            key={product.id}
+            {...product}
+          />
+        ) :
+        null /* put loader in some moment */
+      }
+    </ul>
+  )
 }
+
+export default ProductList;
