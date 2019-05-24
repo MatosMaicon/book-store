@@ -44,10 +44,7 @@ class Cart extends React.Component {
                       className="d-flex justify-content-between align-items-end"
                       key={product.id}>
                         <span>{product.qty}x</span>
-                        <Link
-                          to={`/product/${product.id}/detail`}
-                          className="truncate"
-                        >{product.name}</Link>
+                        <Link to={`/product/${product.id}/detail`} className="truncate">{product.name}</Link>
                         <span>R${product.price}</span>
                     </li>
                     ) : 
