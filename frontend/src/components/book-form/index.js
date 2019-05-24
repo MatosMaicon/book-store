@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 //import { toastr } from 'react-redux-toastr'
 import api from '../../services/api'
 import { Link } from 'react-router-dom';
-import history from '../../config/history';
 
 import { Row, Col, Form, Button } from 'reactstrap'
 import InputLabel from '../shared/input-label'
@@ -25,7 +24,7 @@ export default function StudentList(props) {
         })
         .catch(err => {
           //toastr.error('Error', `${err}`)
-          history.push('/books')
+          props.history.push('/books')
         })
       }
     }, []);
@@ -70,7 +69,7 @@ export default function StudentList(props) {
         await api.bookSave(form, id)
         .then(resp => {
             //toastr.success('Sucesso', 'Operação Realizada com sucesso.')
-            history.push('/books')
+            props.history.push('/books')
         })
         .catch(err => {
             //toastr.error('Error', `${err}`)
@@ -112,6 +111,7 @@ export default function StudentList(props) {
                   <Link className="default btn" to="/books">
                       Cancelar
                   </Link>
+
                   <Button variant="primary" onClick={handleSave}>
                       Salvar
                   </Button>
