@@ -48,10 +48,23 @@ class ProductDetail extends React.Component {
           <Media>
             <div className="mr-3" style={{ width: '200px' }}>
               <Media left href="#">
-                <Media object src={photo(image)} height="250px" width="200px" alt="Generic placeholder image" />
+                <Media
+                  object
+                  src={photo(image)}
+                  height="250px"
+                  width="200px"
+                  alt="Generic placeholder image"
+                />
               </Media>
-              <Button className="w-100 mt-1" onClick={() => this.props.addProductToCart({ id, name, qty: 1, price })}>Adicionar</Button>
-              <Button className="w-100 mt-1" onClick={() => this.props.removeProductToCart(id)}>Remover</Button>
+              <Button
+                className="w-100 mt-1"
+                onClick={() => this.props.addProductToCart({ id, name, qty: 1, price })}
+                >Adicionar</Button>
+              <Button
+                className="w-100 mt-1"
+                onClick={() => this.props.removeProductToCart(id)}
+                disabled={!this.props.products.some(product => product.id === id)}
+                >Remover</Button>
             </div>
             <Media body>
               <Media heading>
@@ -73,7 +86,8 @@ class ProductDetail extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  props: ownProps
+  props: ownProps,
+  products: state.cart
 })
 
 const mapDispatchToProps = dispatch => ({
