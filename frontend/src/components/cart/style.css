@@ -14,3 +14,35 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.out {
+  animation: fadeout 500ms;
+  opacity: 0;
+}
+
+.in {
+  animation: fadein 500ms;
+  opacity: 1;
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
