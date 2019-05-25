@@ -59,8 +59,8 @@ export default function StudentList() {
                             <td>{item.active ? "Sim" : "Não"}</td>
                             <td>{item.createdAt}</td>
                             <td className='options'>
-                                <Link to={`/books/edit/${item.id}`} className="btn btn-primary">edit</Link>
-                                <Button onClick={e => handleDelete(item.id)} className="btn btn-danger">delete</Button>
+                                <Link to={`/books/edit/${item.id}`} className="btn btn-primary mr-1"><i className="fa fa-edit" /></Link>
+                                <Button onClick={e => handleDelete(item.id)} className="btn btn-danger"><i className="fa fa-trash-o" /></Button>
                             </td>
                         </tr>
                     ))}
