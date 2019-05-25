@@ -18,7 +18,7 @@ const api = {
         const config = {
           headers: {
             'content-type': 'multipart/form-data',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTU4NzE5MDY5LCJleHAiOjE1NTg4MDU0Njl9.2u9jnK5smSE-zD3Q3kcMAWccuKjE3x1BFJMuztni3ng'
+            'Authorization': `Bearer ${localStorage.getItem('@bookStore:token')}`
           }
         }
 
@@ -59,6 +59,22 @@ const api = {
         reject(error.response.data);
       }
     })
+  },
+  login: async (form) => {
+    try {
+      return await instance.post(`/authenticate`, form)
+    } catch (error) {
+      console.log(error.response);
+      return false;
+    }
+  },
+  signup: async (form) => {
+    try {
+      return await instance.post(`/users`, form)
+    } catch (error) {
+      console.log(error.response);
+      return false;
+    }
   }
 }
 
