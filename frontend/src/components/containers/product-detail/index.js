@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash';
 
 import * as ActionsCart from '../../../store/actions/cart';
 
-import Api from '../../../services/api';
+import Api from '../../../services/books';
 import photo from '../../../services/photo-random';
 
 

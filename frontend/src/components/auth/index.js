@@ -4,7 +4,7 @@ import { Row, Col, Form, Button } from 'reactstrap'
 import InputLabel from '../shared/input-label'
 import { toastr } from 'react-redux-toastr'
 
-import api from '../../services/api'
+import {signIn, signUp} from '../../services/auth'
 
 class Auth extends Component {
     constructor(props) {
@@ -39,10 +39,10 @@ class Auth extends Component {
     }
     onSubmit = async(event) => {
         event.preventDefault() // Stop form submit
-        const response = this.state.loginMode ? await api.login(this.state.form) : await api.signup(this.state.form)
+        const response = this.state.loginMode ? await signIn(this.state.form) : await signUp(this.state.form)
 
         if(response.status === 200){
-            localStorage.setItem('@bookStore:token', response.data.token);
+            //redirect
         }else{
             toastr.error('Error', `${response.statusText}`)
         }

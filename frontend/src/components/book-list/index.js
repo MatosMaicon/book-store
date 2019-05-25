@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import api from '../../services/api'
+import api from '../../services/books'
 import { toastr } from 'react-redux-toastr'
 import { Link } from 'react-router-dom';
 

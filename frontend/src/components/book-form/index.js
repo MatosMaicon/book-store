@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { toastr } from 'react-redux-toastr'
-import api from '../../services/api'
+import api from '../../services/books'
 import { Link } from 'react-router-dom';
 
 import { Row, Col, Form, Button } from 'reactstrap'

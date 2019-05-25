@@ -1,8 +1,6 @@
-import axios from 'axios';
+import api from './base'
 
-const instance = axios.create({ baseURL: 'http://127.0.0.1:3001/api/v1' });
-
-const api = {
+const books = {
   bookSave: (form, id = undefined) => {
     return new Promise(async (resolve, reject) => {
       const method = !!!id ? 'post' : 'put'
@@ -22,7 +20,7 @@ const api = {
           }
         }
 
-        resolve(instance[method](`books${params}`, formData, config))
+        resolve(api[method](`books${params}`, formData, config))
       } catch (error) {
         console.log(error.response);
         reject(error.response);
@@ -31,7 +29,7 @@ const api = {
   },
   bookDelete: async (id) => {
     try {
-      await instance.delete(`books/${id}`)
+      await api.delete(`books/${id}`)
       return true;
     } catch (error) {
       console.log(error.response);
@@ -41,7 +39,7 @@ const api = {
   list: () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const books = (await instance.get('books')).data;
+        const books = (await api.get('books')).data;
         resolve(books);
       } catch (error) {
         console.log(error.response.data);
@@ -52,7 +50,7 @@ const api = {
   byId: (id) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const book = (await instance.get(`books/${id}`)).data;
+        const book = (await api.get(`books/${id}`)).data;
         resolve(book);
       } catch (error) {
         console.log(error.response.data);
@@ -60,22 +58,6 @@ const api = {
       }
     })
   },
-  login: async (form) => {
-    try {
-      return await instance.post(`/authenticate`, form)
-    } catch (error) {
-      console.log(error.response);
-      return false;
-    }
-  },
-  signup: async (form) => {
-    try {
-      return await instance.post(`/users`, form)
-    } catch (error) {
-      console.log(error.response);
-      return false;
-    }
-  }
 }
 
-export default api;
+export default books;
