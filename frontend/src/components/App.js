@@ -11,6 +11,7 @@ import ProductList from './product-list';
 import ProductDetail from './containers/product-detail';
 import BookList from './book-list';
 import BookForm from './book-form';
+import OrderList from './order-list';
 import Auth from './auth';
 import Message from './shared/message'
 
@@ -26,9 +27,12 @@ const App = props => {
           <Route exact path='/login' component={Auth} />
 
           <Route exact path='/product/:id/detail' component={ProductDetail} />
+
+          <ProtectedRoute exact path='/client' component={OrderList} rule="admin" />
+
           <ProtectedRoute exact path='/books' component={BookList} rule="admin" />
-          <Route exact path='/books/new' component={BookForm} />
-          <Route exact path='/books/edit/:id' component={BookForm} />
+          <ProtectedRoute exact path='/books/new' component={BookForm} rule="admin" />
+          <ProtectedRoute exact path='/books/edit/:id' component={BookForm} rule="admin" />
         </Container>
         <Message />
       </Provider>
