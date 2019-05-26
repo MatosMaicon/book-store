@@ -17,7 +17,10 @@ class UsersController {
             const user = await User.create(params)
             
             user.password = undefined;
-            return res.json(user)
+            return res.send({ 
+                user, 
+                token: await user.generateToken() 
+            });
         }catch(err){
             return res.status(400).json({erro: err})
         }
