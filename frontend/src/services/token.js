@@ -14,7 +14,7 @@ export function rememberToken(token) {
 }
 
 export function getValidToken() {
-  const token = localStorage.getItem(key) 
+  const token = localStorage.getItem(key)
   try {
     const decodedToken = decodeJWT(token)
     // valid token

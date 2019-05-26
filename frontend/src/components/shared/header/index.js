@@ -10,9 +10,13 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem
+} from 'reactstrap';
+import If from '../operator/if'
 
 import Cart from '../../cart';
+
+import { checkAccess, signOut } from '../../../services/auth'
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,16 +38,35 @@ const Header = (props) => {
                 Options
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
+                <If test={checkAccess()}>
+                  <DropdownItem>
+                    <Link to='/client' >
+                      Pedidos
+                    </Link>
+                  </DropdownItem>
+                </If>
+                <If test={checkAccess('admin')}>
+                  <DropdownItem>
+                    <Link to='/books' >
+                      Livros
+                    </Link>
+                  </DropdownItem>
+                </If>
+                <If test={!checkAccess()}>
+                  <DropdownItem>
+                    <Link to='/login' >
+                      Login
+                    </Link>
+                  </DropdownItem>
+                </If>
+                <If test={checkAccess()}>
+                  <DropdownItem divider />
+                  <DropdownItem className="link" >
+                    <Link to='/' onClick={signOut} >
+                      Logout
+                    </Link>
+                  </DropdownItem>
+                </If>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

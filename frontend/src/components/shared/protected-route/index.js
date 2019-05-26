@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom';
-import { getDecodedToken } from '../services/token'
+import { checkAccess } from '../../../services/auth'
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const ProtectedRoute = ({ component: Component, rule, ...rest }) => {
 	return (
 		<Route
-			{...rest}
-			render={props =>
-				getDecodedToken().id === 1 ? (
+		{...rest}
+		render={props =>
+				checkAccess(rule) ? (
 					<Component {...props} />
 				) : (
 						<Redirect
@@ -22,4 +22,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 	);
 }
 
-export default PrivateRoute
+export default ProtectedRoute

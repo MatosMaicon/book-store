@@ -2,9 +2,8 @@ import './style.css'
 import React, { Component } from 'react'
 import { Row, Col, Form, Button } from 'reactstrap'
 import InputLabel from '../shared/input-label'
-import { toastr } from 'react-redux-toastr'
 
-import {signIn, signUp} from '../../services/auth'
+import { signIn, signUp } from '../../services/auth'
 
 class Auth extends Component {
     constructor(props) {
@@ -37,15 +36,15 @@ class Auth extends Component {
     changeMode() {
         this.setState({ loginMode: !this.state.loginMode })
     }
-    onSubmit = async(event) => {
+    
+    onSubmit = async (event) => {
         event.preventDefault() // Stop form submit
         const response = this.state.loginMode ? await signIn(this.state.form) : await signUp(this.state.form)
 
-        if(response.status === 200){
-            //redirect
-        }else{
-            toastr.error('Error', `${response.statusText}`)
-        }
+        if (response && this.props.location.state)
+            this.props.history.push(this.props.location.state.from)
+        else if(response)
+            this.props.history.push('/client')
     }
     render() {
         const { loginMode } = this.state
@@ -74,10 +73,10 @@ class Auth extends Component {
                             </Row>
                         </Form>
                         <br />
-                        <a onClick={() => this.changeMode()}>
+                        <Button onClick={() => this.changeMode()} className="link">
                             {loginMode ? 'Novo usuário? Registrar aqui!' :
                                 'Já é cadastrado? Entrar aqui!'}
-                        </a>
+                        </Button>
                     </div>
                 </Col>
             </Row>
