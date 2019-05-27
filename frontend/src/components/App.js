@@ -28,7 +28,7 @@ const App = props => {
 
           <Route exact path='/product/:id/detail' component={ProductDetail} />
 
-          <ProtectedRoute exact path='/client' component={OrderList} rule="admin" />
+          <ProtectedRoute exact path='/client' component={OrderList} />
 
           <ProtectedRoute exact path='/books' component={BookList} rule="admin" />
           <ProtectedRoute exact path='/books/new' component={BookForm} rule="admin" />

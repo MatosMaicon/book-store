@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             field: 'user_type',
             allowNull: false,
             type: DataTypes.ENUM,
+            defaultValue: 'client',
             values: ['admin', 'client']
         },
         active: {
