@@ -1,0 +1,14 @@
+.checkout-list-prods {
+  display: flex; 
+  width: 100%;
+  max-width: 400px;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.checkout-list-item {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
