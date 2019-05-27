@@ -1,0 +1,48 @@
+.mini-cart {
+  position: absolute !important;
+  margin-top: 10px;
+  right: 20px;
+  width: 400px !important;
+  box-shadow: 1px 1px 4px -1px #c7c7c7;
+  padding: 1rem;
+  z-index: 9999;
+}
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.out {
+  animation: fadeout 500ms;
+  opacity: 0;
+}
+
+.in {
+  animation: fadein 500ms;
+  opacity: 1;
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
