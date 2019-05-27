@@ -11,6 +11,9 @@ export function signUp({ name, email, password }) {
       setToken(token)
       return getDecodedToken()
     })
+    .catch(res => {
+      toastr.error('Error', "Internal error.")
+    })
 }
 
 // Sends a POST request to /auth on the server, with the email & password returning the JWT
