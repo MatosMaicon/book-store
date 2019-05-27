@@ -39,6 +39,17 @@ describe("Authentication", () => {
     expect(response.status).toBe(401);
   });
 
+  it("should not authenticate without user registered", async () => {
+    const response = await request(app)
+      .post(`${process.env.APP_URI}/authenticate`)
+      .send({
+        email: "",
+        password: "123123"
+      });
+
+    expect(response.status).toBe(400);
+  });
+
   it("should return jwt token when authenticated", async () => {
     const user = await factory.create("User", {
       password: "123123"

@@ -38,43 +38,44 @@ const Checkout = ({ products, ownProps, removeProductToCart, removeAllProducts }
       console.log(error);
       toastr.error('Error', `${error}`);
     }
-    
+
   }
   return (
     <>
       <Container className="mt-4">
+        <h1>Checkout</h1>
         <h5>Produtos</h5>
         <ul className="list-unstyled">
-        {
-          products.length ? 
-            products.map(product => 
-            <li
-              key={product.id}
-              className="checkout-list-prods">
-                <Button
-                  outline
-                  size="sm"
-                  color="danger"
-                  onClick={() => removeProductToCart(product.id)}>
-                <i className="fa fa-trash"></i></Button>
-                <div
-                  className="checkout-list-item"
-                  style={{width: '100%', marginLeft: '10px'}}>
-                  <span>{product.qty}x</span>
-                  <Link to={`/product/${product.id}/detail`} className="truncate">{product.name}</Link>
-                  <span>R${product.price}</span>
-                </div>
-            </li>
-            ) : 
-            <li>Seu carrinho está vazio.</li>
-        }
+          {
+            products.length ?
+              products.map(product =>
+                <li
+                  key={product.id}
+                  className="checkout-list-prods">
+                  <Button
+                    outline
+                    size="sm"
+                    color="danger"
+                    onClick={() => removeProductToCart(product.id)}>
+                    <i className="fa fa-trash"></i></Button>
+                  <div
+                    className="checkout-list-item"
+                    style={{ width: '100%', marginLeft: '10px' }}>
+                    <span>{product.qty}x</span>
+                    <Link to={`/product/${product.id}/detail`} className="truncate">{product.name}</Link>
+                    <span>R${product.price}</span>
+                  </div>
+                </li>
+              ) :
+              <li>Seu carrinho está vazio.</li>
+          }
           <li className="mt-3">
             <div className="checkout-list-prods">
               <span>Total</span>
               <span>
                 <strong>R$ {
-                  products.length ? 
-                    products.reduce((acc, item) => acc + (item.price * item.qty), 0) 
+                  products.length ?
+                    products.reduce((acc, item) => acc + (item.price * item.qty), 0)
                     : '0.00'
                 }</strong>
               </span>
@@ -98,7 +99,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   removeProductToCart: id => dispatch(ActionsCart.removeProductToCart(id)),
-  removeAllProducts: () => dispatch(ActionsCart.removeAllProducts()) 
+  removeAllProducts: () => dispatch(ActionsCart.removeAllProducts())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
