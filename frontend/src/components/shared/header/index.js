@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import If from '../operator/if'
 
-import Cart from '../../cart';
+import Cart from '../../containers/cart';
 
 import { checkAccess, signOut } from '../../../services/auth'
 
