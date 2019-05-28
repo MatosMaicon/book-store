@@ -10,5 +10,5 @@ module.exports = (folder) => {
     }
   });
   
-  return multer({ storage : storage})
+  return multer({ storage : storage}).single('image')
 }

@@ -14,6 +14,7 @@ import BookForm from './book-form';
 import OrderList from './order-list';
 import Auth from './auth';
 import Message from './shared/message'
+import Checkout from './containers/checkout';
 
 import './App.css';
 
@@ -27,7 +28,7 @@ const App = props => {
           <Route exact path='/login' component={Auth} />
 
           <Route exact path='/product/:id/detail' component={ProductDetail} />
-
+          <Route exact path='/checkout' component={Checkout} />
           <ProtectedRoute exact path='/client' component={OrderList} />
 
           <ProtectedRoute exact path='/books' component={BookList} rule="admin" />

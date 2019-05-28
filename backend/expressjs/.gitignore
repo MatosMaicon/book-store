@@ -62,4 +62,4 @@ typings/
 
 
 public/images/book/
-__tests__/*.sqlite
+database.sqlite

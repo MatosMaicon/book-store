@@ -11,3 +11,9 @@ export function removeProductToCart(id) {
     id
   };
 }
+
+export function removeAllProducts() {
+  return {
+    type: 'DEL_ALL_PRODUCTS'
+  };
+}

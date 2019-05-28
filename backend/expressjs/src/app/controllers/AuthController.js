@@ -7,7 +7,7 @@ class AuthController {
         try {
             const { email, password } = req.body;
 
-            const user = await User.findOne({ email })
+            const user = await User.findOne({where:{ email }})
 
             if(!user)
                 return res.status(400).send({ error: 'User not found' });
