@@ -40,7 +40,7 @@ export function signOut() {
 export function checkAccess(rule = undefined) {
   const decodedToken = getDecodedToken()
   
-  if (decodedToken && decodedToken.rule === rule)
+  if (decodedToken && decodedToken.role === rule)
     return true
   else if (decodedToken && !rule) //quando nao informado a regra valida apenas se estar autenticado
     return true

@@ -4,11 +4,16 @@ const { Order, Item, User, Book } = require('../models')
 class OrdersController {
     async index(req, res) {
         try {
+            let condition = {}
+            if (req.userRole === 'client')
+                condition = { userId: req.userId }
+
             const orders = await Order.findAll({
                 include: [
                     { model: Item, include: [{ model: Book }] },
                     { model: User }
-                ]
+                ],
+                where: condition
             })
 
             return res.json(orders)
@@ -57,7 +62,7 @@ class OrdersController {
             //Update Items
             const items = req.body.items
             for (let i = 0; items && i < items.length; i++) {
-                const modelItem = await Item.findOne({ where: { orderId: order.id, bookId: items[i].book_id } })
+                const modelItem = await Item.findOne({ where: { orderId: order.id, bookId: items[i].bookId } })
 
                 if (!modelItem) {
                     await Item.create({ ...items[i], orderId: order.id }, { transaction })

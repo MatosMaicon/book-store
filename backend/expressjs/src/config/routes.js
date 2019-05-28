@@ -11,26 +11,24 @@ module.exports = app => {
         router.group("/books", (router) => {
             router.get('/', BooksController.index);
             router.get('/:id', BooksController.show);
-            router.post('/', [authMiddleware, uploadMiddleware('book').single('image')], BooksController.store);
-            router.put('/:id', [authMiddleware, uploadMiddleware('book').single('image')], BooksController.update);    
-            router.delete('/:id', authMiddleware, BooksController.destroy);    
+            router.post('/', [authMiddleware.isAdmin, uploadMiddleware('book')], BooksController.store);
+            router.put('/:id', [authMiddleware.isAdmin, uploadMiddleware('book')], BooksController.update);    
+            router.delete('/:id', authMiddleware.isAdmin, BooksController.destroy);    
         })
 
         router.group("/users", (router) => {
-            router.get('/', authMiddleware, UsersController.index);
+            router.get('/', authMiddleware.isAdmin, UsersController.index);
             router.post('/', UsersController.store);
-            router.put('/:id', authMiddleware, UsersController.update);    
-            router.delete('/:id', authMiddleware, UsersController.destroy);    
+            router.put('/:id', authMiddleware.authorize, UsersController.update);    
+            router.delete('/:id', authMiddleware.isAdmin, UsersController.destroy);    
         })
 
         router.group("/orders", (router) => {
-            router.use(authMiddleware)
-
-            router.get('/', OrdersController.index);
-            router.get('/:id', OrdersController.index);
-            router.post('/', OrdersController.store);
-            router.put('/:id', OrdersController.update);    
-            router.delete('/:id', OrdersController.destroy);    
+            router.get('/', authMiddleware.authorize, OrdersController.index);
+            router.get('/:id', authMiddleware.authorize, OrdersController.show);
+            router.post('/', authMiddleware.authorize, OrdersController.store);
+            router.put('/:id', authMiddleware.isAdmin, OrdersController.update);    
+            router.delete('/:id', authMiddleware.isAdmin, OrdersController.destroy);    
         })
 
         router.post('/authenticate', AuthController.authenticate);    
