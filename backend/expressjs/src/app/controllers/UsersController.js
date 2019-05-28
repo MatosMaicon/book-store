@@ -29,7 +29,7 @@ class UsersController {
     async update(req, res){
         const user = await User.findByPk(req.params.id)
         if(user === null){
-            return res.status(400).json({message: "Usuario not found!"})
+            return res.status(400).json({message: "User not found!"})
         }
 
         try{
@@ -47,7 +47,7 @@ class UsersController {
         const user = await User.findByPk(req.params.id)
 
         if(user === null){
-            return res.status(400).json({message: "Usuario not found!"})
+            return res.status(400).json({message: "User not found!"})
         }
 
         try{
