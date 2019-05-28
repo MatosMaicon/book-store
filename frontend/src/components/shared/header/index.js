@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
   Collapse,
   Navbar,
@@ -12,13 +13,12 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
-import If from '../operator/if'
 
+import If from '../operator/if';
 import Cart from '../../containers/cart';
+import { checkAccess } from '../../../services/auth';
 
-import { checkAccess, signOut } from '../../../services/auth'
-
-const Header = (props) => {
+const Header = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -35,7 +35,7 @@ const Header = (props) => {
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Options
+                { user.name ? user.name : 'Visitante' }
               </DropdownToggle>
               <DropdownMenu right>
                 <If test={checkAccess()}>
@@ -62,9 +62,7 @@ const Header = (props) => {
                 <If test={checkAccess()}>
                   <DropdownItem divider />
                   <DropdownItem className="link" >
-                    <Link to='/' onClick={signOut} >
-                      Logout
-                    </Link>
+                    <Link to="/logout">Logout</Link>
                   </DropdownItem>
                 </If>
               </DropdownMenu>
@@ -76,4 +74,8 @@ const Header = (props) => {
   );
 }
 
-export default Header;
+const mapStateToProps = (state, ownProps) => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(Header);

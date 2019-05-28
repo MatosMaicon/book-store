@@ -12,7 +12,8 @@ import ProductDetail from './containers/product-detail';
 import BookList from './book-list';
 import BookForm from './book-form';
 import OrderList from './order-list';
-import Auth from './auth';
+import Login from './auth/login';
+import Logout from './auth/logout';
 import Message from './shared/message'
 import Checkout from './containers/checkout';
 
@@ -22,10 +23,11 @@ const App = props => {
   return (
     <Router>
       <Provider store={store}>
-        <Header />
+        <Header/>
         <Container>
           <Route exact path='/' component={ProductList} />
-          <Route exact path='/login' component={Auth} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/logout' component={Logout} />
 
           <Route exact path='/product/:id/detail' component={ProductDetail} />
           <Route exact path='/checkout' component={Checkout} />
