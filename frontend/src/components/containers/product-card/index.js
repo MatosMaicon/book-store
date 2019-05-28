@@ -24,7 +24,11 @@ const ProductCard = ({ product, addProductToCart }) => {
           <CardSubtitle>R$ {typeof product.price === 'number' ? product.price.toFixed(2) : product.price}</CardSubtitle>
           <div className="d-flex justify-content-between align-items-center">
             <Link to={`/product/${product.id}/detail`}>Detalhes</Link>
-            <Button onClick={() => addProductToCart({ ...product, qty: 1 })}>Adicionar</Button>
+            <Button
+              className="link"
+              onClick={() => addProductToCart({ ...product, qty: 1 })}>
+              <i className="fa fa-plus-circle fa-2x"></i>
+            </Button>
           </div>
         </CardBody>
       </Card>
