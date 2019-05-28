@@ -1,42 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Button } from 'reactstrap';
 import { toastr } from 'react-redux-toastr';
+import { isEmpty } from 'lodash';
 
 import * as ActionsCart from '../../../store/actions/cart';
 import Api from '../../../services/orders';
-import { getDecodedToken } from '../../../services/token';
 import './style.css';
 
-const Checkout = ({ products, ownProps, removeProductToCart, removeAllProducts }) => {
-
+const Checkout = ({ products, user, ownProps, removeProductToCart, removeAllProducts }) => {
   const handleSubmitOrder = async (e) => {
     e.preventDefault();
-
-    const token = getDecodedToken();
-    const orders = products.map(item => ({
-      bookId: item.id,
-      quantity: item.qty
-    }));
-
-    try {
-      const response = await Api.save({
-        dateOrder: new Date().toISOString(),
-        status: 'pending',
-        items: orders,
-        total: products.reduce((acc, item) => acc + (item.price * item.qty), 0),
-        userId: token.id
-      })
-
-      if (response) {
-        toastr.success('Sucesso', 'Operação Realizada com sucesso.');
-        removeAllProducts();
-        ownProps.history.push('/client');
+    if (!isEmpty(user)) {
+      const orders = products.map(item => ({
+        bookId: item.id,
+        quantity: item.qty
+      }));
+  
+      try {
+        const response = await Api.save({
+          dateOrder: new Date().toISOString(),
+          status: 'pending',
+          items: orders,
+          total: products.reduce((acc, item) => acc + (item.price * item.qty), 0),
+          userId: user.id
+        })
+  
+        if (response) {
+          toastr.success('Sucesso', 'Operação Realizada com sucesso.');
+          removeAllProducts();
+          ownProps.history.push('/client');
+        }
+      } catch (error) {
+        console.log(error);
+        toastr.error('Error', `${error}`);
       }
-    } catch (error) {
-      console.log(error);
-      toastr.error('Error', `${error}`);
+
+    } else {
+      ownProps.history.push({
+        pathname: '/login',
+        state: { from: ownProps.location }
+      });
     }
 
   }
@@ -94,6 +99,7 @@ const Checkout = ({ products, ownProps, removeProductToCart, removeAllProducts }
 
 const mapStateToProps = (state, ownProps) => ({
   products: state.cart,
+  user: state.user,
   ownProps
 })
 

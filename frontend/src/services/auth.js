@@ -33,7 +33,9 @@ export function signIn({ email, password }) {
 }
 
 export function signOut() {
-  setToken(null)
+  setToken(null);
+  if (getDecodedToken() === null) return true;
+  return false;
 }
 
 
