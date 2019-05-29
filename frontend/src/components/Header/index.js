@@ -25,7 +25,7 @@ const Header = ({ user }) => {
     <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand tag="div">
-          <Link to={'/'} className="nav-link">Book Store</Link>
+          <Link to={'/'} className="nav-link">StoreJS</Link>
         </NavbarBrand>
         <NavbarToggler onClick={() => setIsOpen(true)} />
         <Collapse isOpen={isOpen} navbar>
@@ -47,8 +47,8 @@ const Header = ({ user }) => {
                 </If>
                 <If test={checkAccess('admin')}>
                   <DropdownItem>
-                    <Link to='/books' >
-                      Livros
+                    <Link to='/products' >
+                      Produtos
                     </Link>
                   </DropdownItem>
                 </If>

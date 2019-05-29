@@ -1,7 +1,7 @@
 import api from './base'
 
-const books = {
-  bookSave: (form, id = undefined) => {
+const products = {
+  save: (form, id = undefined) => {
     return new Promise(async (resolve, reject) => {
       const method = !!!id ? 'post' : 'put'
       const params = !!!id ? '' : `/${id}`
@@ -20,16 +20,16 @@ const books = {
           }
         }
 
-        resolve(api[method](`books${params}`, formData, config))
+        resolve(api[method](`products${params}`, formData, config))
       } catch (error) {
         console.log(error.response);
         reject(error.response);
       }
     })
   },
-  bookDelete: async (id) => {
+  delete: async (id) => {
     try {
-      await api.delete(`books/${id}`)
+      await api.delete(`products/${id}`)
       return true;
     } catch (error) {
       console.log(error.response);
@@ -39,19 +39,19 @@ const books = {
   list: () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const books = (await api.get('books')).data;
-        resolve(books);
+        const products = (await api.get('products')).data;
+        resolve(products);
       } catch (error) {
         console.log(error.response.data);
         reject(error.response.data);
       }
     })
   },
-  byId: (id) => {
+  get: (id) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const book = (await api.get(`books/${id}`)).data;
-        resolve(book);
+        const product = (await api.get(`products/${id}`)).data;
+        resolve(product);
       } catch (error) {
         console.log(error.response.data);
         reject(error.response.data);
@@ -60,4 +60,4 @@ const books = {
   },
 }
 
-export default books;
+export default products;

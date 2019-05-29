@@ -14,7 +14,7 @@ const Checkout = ({ products, user, ownProps, removeProductToCart, removeAllProd
     e.preventDefault();
     if (!isEmpty(user)) {
       const orders = products.map(item => ({
-        bookId: item.id,
+        productId: item.id,
         quantity: item.qty
       }));
   

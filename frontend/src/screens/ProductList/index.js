@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import api from '../../services/books'
+import api from '../../services/products'
 import { toastr } from 'react-redux-toastr'
 import { Link } from 'react-router-dom';
 
@@ -14,8 +14,8 @@ export default function StudentList() {
     })
   }
 
-  async function deleteBook(book_id) {
-    const res = await api.bookDelete(book_id)
+  async function deleteProduct(product_id) {
+    const res = await api.delete(product_id)
     if (res) {
       toastr.success('Sucesso', 'Exclusão realizada com exito!')
     } else {
@@ -23,9 +23,9 @@ export default function StudentList() {
     }
   }
 
-  async function handleDelete(book_id) {
+  async function handleDelete(product_id) {
     const toastrConfirmOptions = {
-      onOk: () => deleteBook(book_id),
+      onOk: () => deleteProduct(product_id),
       onCancel: () => { }
     };
     toastr.confirm('Você tem certeza sobre isso?', toastrConfirmOptions);
@@ -37,8 +37,8 @@ export default function StudentList() {
 
   return (
     <>
-      <h1>Listar Livros</h1>
-      <Link className="btn-primary btn" to="books/new">Novo</Link>
+      <h1>Listar Produtos</h1>
+      <Link className="btn-primary btn" to="products/new">Novo</Link>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -59,7 +59,7 @@ export default function StudentList() {
               <td>{item.active ? "Sim" : "Não"}</td>
               <td>{item.createdAt}</td>
               <td className='options'>
-                <Link to={`/books/edit/${item.id}`} className="btn btn-primary mr-1"><i className="fa fa-edit" /></Link>
+                <Link to={`/products/edit/${item.id}`} className="btn btn-primary mr-1"><i className="fa fa-edit" /></Link>
                 <Button onClick={e => handleDelete(item.id)} className="btn btn-danger"><i className="fa fa-trash-o" /></Button>
               </td>
             </tr>

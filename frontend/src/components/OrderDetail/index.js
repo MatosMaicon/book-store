@@ -8,9 +8,9 @@ export default function StudentList(props) {
     if (props.list)
       return props.list.map(item => {
         return <tr key={item.id}>
-          <td>{item.Book.name}</td>
+          <td>{item.product.name}</td>
           <td>{item.quantity}</td>
-          <td>{item.Book.price}</td>
+          <td>{item.product.price}</td>
         </tr>
       })
   }
@@ -21,7 +21,7 @@ export default function StudentList(props) {
       <Table className="table">
         <thead>
           <tr>
-            <th>Livros</th>
+            <th>Produtos</th>
             <th>Quantidade</th>
             <th>Valor</th>
           </tr>

@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash';
 
 import { addProductToCart, removeProductToCart } from '../../store/actions/cart';
 
-import Api from '../../services/books';
+import Api from '../../services/products';
 
 
 const ProductDetail = ({ products, ownProps, addProductToCart, removeProductToCart }) => {
@@ -35,7 +35,7 @@ const ProductDetail = ({ products, ownProps, addProductToCart, removeProductToCa
             <Media left href="#">
               <Media
                 object
-                src={`http://localhost:3001/images/book/${image}`}
+                src={`http://localhost:3001/images/product/${image}`}
                 height="250px"
                 width="200px"
                 alt="Generic placeholder image"

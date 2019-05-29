@@ -36,7 +36,7 @@ export default function OrderList() {
 	}
 
 	function handleDetails(index) {
-		setDetails(list[index].Items)
+		setDetails(list[index].items)
 	}
 
 	useEffect(() => {

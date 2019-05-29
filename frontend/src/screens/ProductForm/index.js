@@ -4,7 +4,7 @@ import { toastr } from 'react-redux-toastr'
 import { Link } from 'react-router-dom';
 
 import InputLabel from '../../components/InputLabel'
-import api from '../../services/books'
+import api from '../../services/products'
 
 export default function StudentList(props) {
   
@@ -22,12 +22,12 @@ export default function StudentList(props) {
     const id = props.match.params.id;
     if (!!id) {
       setId(id);
-      api.byId(id).then(response => {
+      api.get(id).then(response => {
         setForm({ ...response })
       })
         .catch(err => {
           toastr.error('Error', `${err}`)
-          props.history.push('/books')
+          props.history.push('/products')
         })
     }
   }, [props]);
@@ -69,10 +69,10 @@ export default function StudentList(props) {
   async function handleSave(event) {
     event.preventDefault() // Stop form submit
 
-    await api.bookSave(form, id)
+    await api.save(form, id)
       .then(resp => {
         toastr.success('Sucesso', 'Operação Realizada com sucesso.')
-        props.history.push('/books')
+        props.history.push('/products')
       })
       .catch(err => {
         toastr.error('Error', `${err}`)
@@ -81,21 +81,21 @@ export default function StudentList(props) {
 
   return (
     <>
-      <h1>Cadastrar Livros</h1>
+      <h1>Cadastrar Produto</h1>
       <Row>
         <Form className="col-sm-12 col-lg-6">
           <Row>
             <Col>
-              <InputLabel label="Nome" name="name" type="text" placeholder="Informe o nome do livro" value={form.name} onChange={handleInputChange} />
+              <InputLabel label="Nome" name="name" type="text" placeholder="Informe o nome do produto" value={form.name} onChange={handleInputChange} />
             </Col>
             <Col>
-              <InputLabel label="Preço" name="price" type="number" placeholder="Informe o valor do livro" value={form.price} onChange={handleInputChange} />
+              <InputLabel label="Preço" name="price" type="number" placeholder="Informe o valor do produto" value={form.price} onChange={handleInputChange} />
             </Col>
           </Row>
 
           <Row>
             <Col >
-              <InputLabel label="Descrição" name="description" type="textarea" placeholder="Informe a descrição do livro" value={form.description} onChange={handleInputChange} />
+              <InputLabel label="Descrição" name="description" type="textarea" placeholder="Informe a descrição do produto" value={form.description} onChange={handleInputChange} />
             </Col >
           </Row>
 
@@ -111,7 +111,7 @@ export default function StudentList(props) {
             </Col >
           </Row>
 
-          <Link className="default btn" to="/books">
+          <Link className="default btn" to="/products">
             Cancelar
                   </Link>
 

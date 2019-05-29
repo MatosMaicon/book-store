@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Api from '../../services/books';
+import Api from '../../services/products';
 import ProductCard from '../../components/ProductCard';
 
 const ProductList = () => {
