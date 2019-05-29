@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const Book = sequelize.define('Book',{
+    const Product = sequelize.define('Product',{
         name: DataTypes.STRING,
         description: DataTypes.TEXT,
         price: DataTypes.FLOAT,
@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => {
         // },
     });
 
-    Book.associate = function (models) {
-        Book.hasMany(models.Item)
+    Product.associate = function (models) {
+        Product.hasMany(models.Item, {as: 'items'})
     };
 
-    return Book;
+    return Product;
 };

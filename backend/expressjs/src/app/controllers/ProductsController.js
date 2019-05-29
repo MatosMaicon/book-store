@@ -1,15 +1,15 @@
 const fs = require('fs');
 
-const { Book } = require('../models')
+const { Product } = require('../models')
 
-class BooksController {
+class ProductsController {
     async index(req, res) {
         try {
-            const books = await Book.findAll({
+            const products = await Product.findAll({
                 //attributes: ['name', 'description', 'price', 'active','image']
             })
 
-            return res.json(books)
+            return res.json(products)
         } catch(err){
             return res.status(400).json({erro: err})
         }
@@ -17,9 +17,9 @@ class BooksController {
 
     async show(req, res) {
         try {
-            const book = await Book.findByPk(req.params.id)
+            const product = await Product.findByPk(req.params.id)
 
-            return res.json(book)
+            return res.json(product)
         } catch(err){
             return res.status(400).json({erro: err})
         }
@@ -27,16 +27,16 @@ class BooksController {
 
     async store(req, res){
         try{
-            const book = await Book.create({...req.body, image: req.file.filename})
-            return res.json(book)
+            const product = await Product.create({...req.body, image: req.file.filename})
+            return res.json(product)
         }catch(err){
             return res.status(400).json({erro: err})
         }
     }
 
     async update(req, res){
-        const book = await Book.findByPk(req.params.id)
-        if(book === null){
+        const product = await Product.findByPk(req.params.id)
+        if(product === null){
             return res.status(400).json({message: "Livro not found!"})
         }
         
@@ -44,40 +44,40 @@ class BooksController {
             let attributes = req.body
             //apaga imagem antiga se uma nova for passada
             if (!!req.file){
-                fs.unlink(`./public/images/book/${book.image}`, (err) => {
+                fs.unlink(`./public/images/product/${product.image}`, (err) => {
                     if (err) throw err;
                 });
 
                 attributes = {...attributes, image: req.file.filename}
             }
 
-            await book.update(attributes)
-            return res.json(book)
+            await product.update(attributes)
+            return res.json(product)
         }catch(err){
             return res.status(400).json({erro: err})
         }
     }
 
     async destroy(req, res){
-        const book = await Book.findByPk(req.params.id)
+        const product = await Product.findByPk(req.params.id)
 
-        if(book === null){
+        if(product === null){
             return res.status(400).json({message: "Livro not found!"})
         }
 
         try{
-            await book.destroy()
+            await product.destroy()
 
             //apaga imagem
-            fs.unlink(`./public/images/book/${book.image}`, (err) => {
+            fs.unlink(`./public/images/product/${product.image}`, (err) => {
                 if (err) throw err;
             });
 
-            return res.json(book)
+            return res.json(product)
         }catch(err){
             return res.status(400).json({erro: err})
         }
     }
 }
 
-module.exports = new BooksController();
+module.exports = new ProductsController();

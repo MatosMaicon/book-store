@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      book_id: {
+      product_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'books',
+          model: 'products',
           key: 'id',
         },
         onUpdate: 'CASCADE',

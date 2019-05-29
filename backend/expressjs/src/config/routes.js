@@ -1,5 +1,5 @@
 const AuthController = require('../app/controllers/AuthController')
-const BooksController = require('../app/controllers/BooksController')
+const ProductsController = require('../app/controllers/ProductsController')
 const UsersController = require('../app/controllers/UsersController')
 const OrdersController = require('../app/controllers/OrdersController')
 
@@ -8,12 +8,12 @@ const uploadMiddleware = require('../app/middlewares/upload')
 
 module.exports = app => {
     app.group("/api/v1/", (router) => { 
-        router.group("/books", (router) => {
-            router.get('/', BooksController.index);
-            router.get('/:id', BooksController.show);
-            router.post('/', [authMiddleware.isAdmin, uploadMiddleware('book')], BooksController.store);
-            router.put('/:id', [authMiddleware.isAdmin, uploadMiddleware('book')], BooksController.update);    
-            router.delete('/:id', authMiddleware.isAdmin, BooksController.destroy);    
+        router.group("/products", (router) => {
+            router.get('/', ProductsController.index);
+            router.get('/:id', ProductsController.show);
+            router.post('/', [authMiddleware.isAdmin, uploadMiddleware('product')], ProductsController.store);
+            router.put('/:id', [authMiddleware.isAdmin, uploadMiddleware('product')], ProductsController.update);    
+            router.delete('/:id', authMiddleware.isAdmin, ProductsController.destroy);    
         })
 
         router.group("/users", (router) => {

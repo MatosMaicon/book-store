@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     },{});
     User.associate = function (models) {
-        User.hasMany(models.Order)
+        User.hasMany(models.Order, {as: 'orders'})
     };
 
     User.prototype.generateToken = async function () {

@@ -2,8 +2,8 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Item = sequelize.define('Item',{
-        bookId: {
-            field: 'book_id',
+        productId: {
+            field: 'product_id',
             allowNull: false,
             type: DataTypes.INTEGER
         },
@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     },{});
 
     Item.associate = function (models) {
-        Item.belongsTo(models.Book)
-        Item.belongsTo(models.Order)
+        Item.belongsTo(models.Product, {as: 'product'})
+        Item.belongsTo(models.Order, {as: 'order'})
     };
 
     return Item;

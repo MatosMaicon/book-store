@@ -8,7 +8,7 @@ module.exports = {
         */
 
         return queryInterface.bulkInsert(
-            'books', [
+            'products', [
                 {
                     name: 'Do que as coisas são feitas',
                     description: 'Do que é feito o livro? E a porta? E a vela? Do que é feito o colchão? E o balde? E a panela? Nessa aventura, o aprendizado acontece junto com a diversão. Por meio das rimas, vamos descobrindo, de forma lúdica e instigante, do que são feitas as coisas. Neste livro são apresentados materiais que fazem parte do dia a dia das crianças, seus usos e propriedades.',
@@ -93,6 +93,6 @@ module.exports = {
           Return a promise to correctly handle asynchronicity.
         */
         
-        return queryInterface.bulkDelete('books', null, {});        
+        return queryInterface.bulkDelete('products', null, {});        
     }
 };
