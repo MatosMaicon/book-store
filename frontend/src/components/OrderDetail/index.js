@@ -1,6 +1,6 @@
 import React from 'react'
 
-import If from '../shared/operator/if'
+import If from '../Operator/if'
 import { Table } from 'reactstrap'
 
 export default function StudentList(props) {

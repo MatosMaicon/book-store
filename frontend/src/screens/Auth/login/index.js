@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Row, Col, Form, Button } from 'reactstrap'
 import { connect } from 'react-redux';
 
-import InputLabel from '../../shared/input-label'
+import InputLabel from '../../../components/InputLabel'
 import { signIn, signUp } from '../../../services/auth'
 
 import * as ActionsUser from '../../../store/actions/user';

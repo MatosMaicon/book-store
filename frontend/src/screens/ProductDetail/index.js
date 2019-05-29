@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { Media, Button } from 'reactstrap';
 import { isEmpty } from 'lodash';
 
-import * as ActionsCart from '../../../store/actions/cart';
+import { addProductToCart, removeProductToCart } from '../../store/actions/cart';
 
-import Api from '../../../services/books';
-import photo from '../../../services/photo-random';
+import Api from '../../services/books';
 
 
 const ProductDetail = ({ products, ownProps, addProductToCart, removeProductToCart }) => {
@@ -36,7 +35,7 @@ const ProductDetail = ({ products, ownProps, addProductToCart, removeProductToCa
             <Media left href="#">
               <Media
                 object
-                src={photo(image)}
+                src={`http://localhost:3001/images/book/${image}`}
                 height="250px"
                 width="200px"
                 alt="Generic placeholder image"
@@ -76,8 +75,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: product => dispatch(ActionsCart.addProductToCart(product)), 
-  removeProductToCart: id => dispatch(ActionsCart.removeProductToCart(id)) 
+  addProductToCart: product => dispatch(addProductToCart(product)), 
+  removeProductToCart: id => dispatch(removeProductToCart(id)) 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

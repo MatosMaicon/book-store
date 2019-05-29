@@ -14,9 +14,9 @@ import {
   DropdownItem
 } from 'reactstrap';
 
-import If from '../operator/if';
-import Cart from '../../containers/cart';
-import { checkAccess } from '../../../services/auth';
+import If from '../Operator/if';
+import Cart from '../Cart';
+import { checkAccess } from '../../services/auth';
 
 const Header = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);

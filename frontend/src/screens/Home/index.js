@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Api from '../../services/books';
-import ProductCard from '../containers/product-card';
+import ProductCard from '../../components/ProductCard';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);

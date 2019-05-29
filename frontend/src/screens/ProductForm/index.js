@@ -3,7 +3,7 @@ import { Row, Col, Form, Button } from 'reactstrap'
 import { toastr } from 'react-redux-toastr'
 import { Link } from 'react-router-dom';
 
-import InputLabel from '../shared/input-label'
+import InputLabel from '../../components/InputLabel'
 import api from '../../services/books'
 
 export default function StudentList(props) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'reactstrap';
 
-import * as ActionsCart from '../../../store/actions/cart';
+import { removeProductToCart } from '../../store/actions/cart';
 import './style.css';
 
 const Cart = ({ products, removeProductToCart }) => {
@@ -57,7 +57,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  removeProductToCart: id => dispatch(ActionsCart.removeProductToCart(id)) 
+  removeProductToCart: id => dispatch(removeProductToCart(id)) 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

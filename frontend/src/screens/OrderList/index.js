@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import api from '../../services/orders'
 import { toastr } from 'react-redux-toastr'
 import { Link } from 'react-router-dom';
-import If from '../shared/operator/if'
+import If from '../../components/Operator/if'
 
 import { Table, Button } from 'reactstrap'
-import OrderShow from '../order-show'
+import OrderDetail from '../../components/OrderDetail'
 
 export default function OrderList() {
 	const [list, setList] = useState([]);
@@ -75,7 +75,7 @@ export default function OrderList() {
 				</tbody>
 			</Table>
 
-			<OrderShow list={details} />
+			<OrderDetail list={details} />
 		</>
 	)
 }

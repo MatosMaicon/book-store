@@ -5,8 +5,8 @@ import { Container, Button } from 'reactstrap';
 import { toastr } from 'react-redux-toastr';
 import { isEmpty } from 'lodash';
 
-import * as ActionsCart from '../../../store/actions/cart';
-import Api from '../../../services/orders';
+import { removeProductToCart, removeAllProducts } from '../../store/actions/cart';
+import Api from '../../services/orders';
 import './style.css';
 
 const Checkout = ({ products, user, ownProps, removeProductToCart, removeAllProducts }) => {
@@ -104,8 +104,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  removeProductToCart: id => dispatch(ActionsCart.removeProductToCart(id)),
-  removeAllProducts: () => dispatch(ActionsCart.removeAllProducts())
+  removeProductToCart: id => dispatch(removeProductToCart(id)),
+  removeAllProducts: () => dispatch(removeAllProducts())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

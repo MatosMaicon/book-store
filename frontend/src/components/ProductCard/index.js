@@ -9,21 +9,20 @@ import {
   CardSubtitle,
   CardTitle } from 'reactstrap';
 
-import * as ActionsCart from '../../../store/actions/cart';
+import { addProductToCart } from '../../store/actions/cart';
 
-import photo from '../../../services/photo-random';
 import './style.css';
 
 const ProductCard = ({ product, addProductToCart }) => {
   return (
     <li className="m-4">
       <Card className="card-item">
-        <CardImg width="100%" src={photo(product.image)} alt="Card image cap" />
+        <CardImg width="100%" src={`http://localhost:3001/images/book/${product.image}`} alt="Card image cap" />
         <CardBody>
           <CardTitle>{product.name}</CardTitle>
           <CardSubtitle>R$ {typeof product.price === 'number' ? product.price.toFixed(2) : product.price}</CardSubtitle>
           <div className="d-flex justify-content-between align-items-center">
-            <Link to={`/product/${product.id}/detail`}>Detalhes</Link>
+            <Link to={`/products/show/${product.id}`}>Detalhes</Link>
             <Button
               className="link"
               onClick={() => addProductToCart({ ...product, qty: 1 })}>
@@ -41,7 +40,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: product => dispatch(ActionsCart.addProductToCart(product)) 
+  addProductToCart: product => dispatch(addProductToCart(product)) 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
