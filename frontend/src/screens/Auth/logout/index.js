@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { signOut } from '../../../services/auth';
+import { signOut } from '../../../services/users';
 import * as ActionsUser from '../../../store/actions/user';
 
 const Logout = ({ ownProps, removeCurrentUser }) => {

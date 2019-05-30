@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { Row, Col, Form, Button } from 'reactstrap'
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import InputLabel from '../../../components/InputLabel'
-import { signIn, signUp } from '../../../services/auth'
 
-import * as ActionsUser from '../../../store/actions/user';
+import { signIn, signUp } from '../../../store/actions/auth';
 import './style.css'
 
-const Auth = ({ ownProps, addCurrentUser }) => {
-  const initialState = { name: '', email: '',  password: '' };
+const Auth = props => {
+  const initialState = { name: '', email: '', password: '' };
   const [loginMode, setLoginMode] = useState(true);
   const [form, setForm] = useState(initialState);
 
@@ -24,15 +24,12 @@ const Auth = ({ ownProps, addCurrentUser }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault() // Stop form submit
-    const response = loginMode ? await signIn(form) : await signUp(form)
-    if (response) {
-      const { id, role, name = 'Default' } = response;
-      addCurrentUser({ id, role, name });
-      
-      ownProps.location.state ?
-      ownProps.history.push(ownProps.location.state.from) :
-      ownProps.history.push('/client');
-    }
+    const response = loginMode ? await props.signIn(form) : await props.signUp(form)
+    // if (response) {
+    //   ownProps.location.state ?
+    //     ownProps.history.push(ownProps.location.state.from) :
+    //     ownProps.history.push('/client');
+    // }
   }
 
   return (
@@ -69,12 +66,10 @@ const Auth = ({ ownProps, addCurrentUser }) => {
   )
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  ownProps
-})
+// const mapStateToProps = (state, ownProps) => ({
+//   ownProps
+// })
 
-const mapDispatchToProps = dispatch => ({
-  addCurrentUser: user => dispatch(ActionsUser.addCurrentUser(user)) 
-})
+const mapDispatchToProps = dispatch => bindActionCreators({ signIn, signUp }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(null, mapDispatchToProps)(Auth);

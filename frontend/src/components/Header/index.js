@@ -16,7 +16,7 @@ import {
 
 import If from '../Operator/if';
 import Cart from '../Cart';
-import { checkAccess } from '../../services/auth';
+import { checkAccess } from '../../services/users';
 
 const Header = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);

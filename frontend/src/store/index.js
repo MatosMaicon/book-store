@@ -1,4 +1,5 @@
 import { createStore, compose, applyMiddleware } from "redux";
+import thunk from "redux-thunk"
 import Reducers from "./reducers";
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
@@ -15,5 +16,5 @@ const persistedReducer = persistReducer(persistConfig, Reducers)
 
 export default createStore(
   persistedReducer, 
-  composeEnhancer(applyMiddleware()) // if you need Middleware
+  composeEnhancer(applyMiddleware(thunk)) // if you need Middleware
 );
