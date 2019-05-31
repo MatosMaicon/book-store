@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom';
-import { checkAccess } from '../../services/users'
+import { connect } from 'react-redux';
 
-const ProtectedRoute = ({ component: Component, rule, ...rest }) => {
+const ProtectedRoute = ({ component: Component, rule, auth, ...rest }) => {
 	return (
 		<Route
-		{...rest}
-		render={props =>
-				checkAccess(rule) ? (
+			{...rest}
+			render={props =>
+				auth ? (
 					<Component {...props} />
 				) : (
 						<Redirect
@@ -22,4 +22,8 @@ const ProtectedRoute = ({ component: Component, rule, ...rest }) => {
 	);
 }
 
-export default ProtectedRoute
+const mapStateToProps = store => ({
+	auth: store.auth
+});
+
+export default connect(mapStateToProps)(ProtectedRoute);

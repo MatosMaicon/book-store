@@ -1,13 +1,13 @@
 import { SIGN_IN, SIGN_UP, SIGN_OUT } from "../actions/action_types";
 
-export default function auth(state = {}, action) {
+export default function auth(state = null, action) {
     switch (action.type) {
         case SIGN_IN:
-            return { ...action.auth };
+            return action.payload.status === 200 ? { ...action.payload.data } : null
         case SIGN_UP:
-            return { ...action.auth };
+            return action.payload.status === 200 ? { ...action.payload.data } : null
         case SIGN_OUT:
-            return {};
+            return null;
         default:
             return state;
     }

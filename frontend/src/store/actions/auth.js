@@ -5,7 +5,7 @@ export const signIn = (form) => async (dispatch) => {
     let response = await login(form);
     dispatch({
         type: SIGN_IN,
-        auth: response
+        payload: response
     });
 }
 
@@ -13,7 +13,7 @@ export const signUp = (form) => async (dispatch) => {
     let response = await save(form);
     dispatch({
         type: SIGN_UP,
-        auth: response.data
+        payload: response
     });
 }
 

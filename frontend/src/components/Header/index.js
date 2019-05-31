@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   Collapse,
   Navbar,
@@ -14,11 +15,12 @@ import {
   DropdownItem
 } from 'reactstrap';
 
-import If from '../Operator/if';
+import IfAuth from '../Operator/ifAuth';
+import IfNotAuth from '../Operator/ifNotAuth';
 import Cart from '../Cart';
-import { checkAccess } from '../../services/users';
+import { signOut } from '../../store/actions/auth'
 
-const Header = ({ user }) => {
+const Header = ({ auth, signOut }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -35,36 +37,36 @@ const Header = ({ user }) => {
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                { user.name ? user.name : 'Visitante' }
+                { auth ? auth.user.name : 'Visitante' }
               </DropdownToggle>
               <DropdownMenu right>
-                <If test={checkAccess()}>
+                <IfAuth roles={["admin", "client"]}>
                   <DropdownItem>
                     <Link to='/client' >
                       Pedidos
                     </Link>
                   </DropdownItem>
-                </If>
-                <If test={checkAccess('admin')}>
+                </IfAuth>
+                <IfAuth roles={["admin"]}>
                   <DropdownItem>
                     <Link to='/products' >
                       Produtos
                     </Link>
                   </DropdownItem>
-                </If>
-                <If test={!checkAccess()}>
+                </IfAuth>
+                <IfNotAuth>
                   <DropdownItem>
                     <Link to='/login' >
                       Login
                     </Link>
                   </DropdownItem>
-                </If>
-                <If test={checkAccess()}>
+                </IfNotAuth>
+                <IfAuth roles={["admin", "client"]}>
                   <DropdownItem divider />
-                  <DropdownItem className="link" >
-                    <Link to="/logout">Logout</Link>
+                  <DropdownItem className="link" onClick={signOut} >
+                    Logout
                   </DropdownItem>
-                </If>
+                </IfAuth>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
@@ -74,8 +76,8 @@ const Header = ({ user }) => {
   );
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  user: state.user
+const mapStateToProps = state => ({
+  auth: state.auth
 })
-
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => bindActionCreators({ signOut }, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

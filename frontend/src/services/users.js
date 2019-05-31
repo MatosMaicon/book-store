@@ -7,9 +7,7 @@ import { toastr } from 'react-redux-toastr'
 export function save({ name, email, password }) {
   return api.post('/users', { name, email, password })
     .then(res => {
-      const token = res.data.token
-      setToken(token)
-      return getDecodedToken()
+      return res
     })
     .catch(res => {
       toastr.error('Error', "Internal error.")
@@ -23,11 +21,12 @@ export function login({ email, password }) {
     .then(res => {
       // const token = res.data.token
       // setToken(token)
-      return res.data
+      return res
     })
     .catch(res => {
       if (res.response.status === 400 || res.response.status === 401) {
         toastr.error('Error', "There was an error with your email or password. Please try again.")
+        return res
       }
     })
 }
