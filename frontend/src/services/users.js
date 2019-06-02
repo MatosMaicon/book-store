@@ -10,6 +10,7 @@ export function save({ name, email, password }) {
     })
     .catch(res => {
       toastr.error('Error', "Internal error.")
+      return Promise.reject(res);
     })
 }
 
@@ -23,7 +24,7 @@ export function login({ email, password }) {
     .catch(res => {
       if (res.response.status === 400 || res.response.status === 401) {
         toastr.error('Error', "There was an error with your email or password. Please try again.")
-        return res
+        return Promise.reject(res);
       }
     })
 }

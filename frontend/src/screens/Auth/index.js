@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import InputLabel from '../../components/InputLabel'
-import IfAuth from '../../components/Operator/ifAuth'
 
 import { signIn, signUp } from '../../store/actions/auth';
 import './style.css'
