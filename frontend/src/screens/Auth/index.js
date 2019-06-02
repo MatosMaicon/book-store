@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Row, Col, Form, Button } from 'reactstrap'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import InputLabel from '../../../components/InputLabel'
+import InputLabel from '../../components/InputLabel'
+import IfAuth from '../../components/Operator/ifAuth'
 
-import { signIn, signUp } from '../../../store/actions/auth';
+import { signIn, signUp } from '../../store/actions/auth';
 import './style.css'
 
 const Auth = props => {
   const initialState = { name: '', email: '', password: '' };
   const [loginMode, setLoginMode] = useState(true);
   const [form, setForm] = useState(initialState);
-
-  useEffect(() => {
-    if(props.auth)
-      props.location.state ?
-        props.history.push(props.location.state.from) :
-        props.history.push('/client');
-  }, [props.auth]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
@@ -30,8 +24,12 @@ const Auth = props => {
   }
 
   const onSubmit = async (event) => {
-    event.preventDefault() // Stop form submit
-    loginMode ? await props.signIn(form) : await props.signUp(form)
+    event.preventDefault(); // Stop form submit
+    (loginMode ? props.signIn(form) : props.signUp(form)).then(() => {
+      props.location.state ?
+        props.history.push(props.location.state.from) :
+        props.history.push('/client');
+    })
   }
 
   return (

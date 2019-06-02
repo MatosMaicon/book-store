@@ -1,4 +1,5 @@
 import api from './base'
+import authHeader from '../helpers/authHeader'
 
 const orders = {
   save: (form, id = undefined) => {
@@ -6,8 +7,12 @@ const orders = {
       const method = !!!id ? 'post' : 'put'
       const params = !!!id ? '' : `/${id}`
 
+      let config = {
+        headers: { ...authHeader() }
+      }
+
       try {
-        resolve(api[method](`orders${params}`, form))
+        resolve(api[method](`orders${params}`, form, config))
       } catch (error) {
         console.log(error.response);
         reject(error.response);
@@ -16,7 +21,11 @@ const orders = {
   },
   delete: async (id) => {
     try {
-      await api.delete(`orders/${id}`)
+      let config = {
+        headers: { ...authHeader() }
+      }
+
+      await api.delete(`orders/${id}`, config)
       return true;
     } catch (error) {
       console.log(error.response);
@@ -26,7 +35,11 @@ const orders = {
   list: () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const orders = (await api.get('orders')).data;
+        let config = {
+          headers: { ...authHeader() }
+        }
+
+        const orders = (await api.get('orders', config)).data;
         resolve(orders);
       } catch (error) {
         console.log(error.response);
@@ -37,7 +50,11 @@ const orders = {
   get: (id) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const order = (await api.get(`orders/${id}`)).data;
+        let config = {
+          headers: { ...authHeader() }
+        }
+
+        const order = (await api.get(`orders/${id}`, config)).data;
         resolve(order);
       } catch (error) {
         console.log(error.response);

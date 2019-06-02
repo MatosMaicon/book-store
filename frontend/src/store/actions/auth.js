@@ -6,7 +6,8 @@ export const signIn = (form) => async (dispatch) => {
     dispatch({
         type: SIGN_IN,
         payload: response
-    });
+    })
+    return Promise.resolve()
 }
 
 export const signUp = (form) => async (dispatch) => {
@@ -14,7 +15,8 @@ export const signUp = (form) => async (dispatch) => {
     dispatch({
         type: SIGN_UP,
         payload: response
-    });
+    })
+    return Promise.resolve()
 }
 
 export const signOut = () => {

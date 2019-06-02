@@ -9,10 +9,10 @@ import { removeProductToCart, removeAllProducts } from '../../store/actions/cart
 import Api from '../../services/orders';
 import './style.css';
 
-const Checkout = ({ products, user, ownProps, removeProductToCart, removeAllProducts }) => {
+const Checkout = ({ products, auth, ownProps, removeProductToCart, removeAllProducts }) => {
   const handleSubmitOrder = async (e) => {
     e.preventDefault();
-    if (!isEmpty(user)) {
+    if (!isEmpty(auth)) {
       const orders = products.map(item => ({
         productId: item.id,
         quantity: item.qty
@@ -24,7 +24,7 @@ const Checkout = ({ products, user, ownProps, removeProductToCart, removeAllProd
           status: 'pending',
           items: orders,
           total: products.reduce((acc, item) => acc + (item.price * item.qty), 0),
-          userId: user.id
+          userId: auth.user.id
         })
   
         if (response) {
@@ -99,7 +99,7 @@ const Checkout = ({ products, user, ownProps, removeProductToCart, removeAllProd
 
 const mapStateToProps = (state, ownProps) => ({
   products: state.cart,
-  user: state.user,
+  auth: state.auth,
   ownProps
 })
 

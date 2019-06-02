@@ -1,24 +1,20 @@
 // For storing the logged in user's credentails across page refreshes
 import decodeJWT from 'jwt-decode'
-const key = '@bookStore:token'
+const key = 'persist:@storejs'
 
-export function rememberToken(token) {
-  if (token) {
-    // store the token
-    localStorage.setItem(key, token)
-  }
-  else {
-    // Clear token from local storage
-    localStorage.removeItem(key)
-  }
-}
 
 export function getValidToken() {
-  const token = localStorage.getItem(key)
+  const store = JSON.parse(localStorage.getItem(key))
+  const auth = store ? JSON.parse(store.auth) : null
+  const token = auth ? auth.token : null
+
+  if (!token) return null
+
   try {
     const decodedToken = decodeJWT(token)
     // valid token
     const now = Date.now() / 1000
+
     // check if token has expired
     if (now > decodedToken.exp) {
       return null
@@ -39,4 +35,15 @@ export function getDecodedToken() {
   else {
     return null
   }
+}
+
+export function checkAccess(roles = undefined) {
+  const decodedToken = getDecodedToken()
+
+  if ( decodedToken && roles && roles.indexOf(decodedToken.role) >= 0 )
+    return true
+  else if (decodedToken && !roles) //quando nao informado a regra valida apenas se estar autenticado
+    return true
+  else
+    return false
 }

@@ -1,4 +1,5 @@
 import api from './base'
+import authHeader from '../helpers/authHeader'
 
 const products = {
   save: (form, id = undefined) => {
@@ -16,7 +17,7 @@ const products = {
         const config = {
           headers: {
             'content-type': 'multipart/form-data',
-            'Authorization': `Bearer ${localStorage.getItem('@bookStore:token')}`
+            ...authHeader()
           }
         }
 
@@ -28,8 +29,12 @@ const products = {
     })
   },
   delete: async (id) => {
+    let config = {
+      headers: { ...authHeader() }
+    }
+
     try {
-      await api.delete(`products/${id}`)
+      await api.delete(`products/${id}`, config)
       return true;
     } catch (error) {
       console.log(error.response);

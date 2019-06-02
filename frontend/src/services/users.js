@@ -1,5 +1,4 @@
-import api, { setToken } from './base'
-import { getDecodedToken } from './token'
+import api from './base'
 
 import { toastr } from 'react-redux-toastr'
 
@@ -19,8 +18,6 @@ export function save({ name, email, password }) {
 export function login({ email, password }) {
   return api.post('/authenticate', { email, password })
     .then(res => {
-      // const token = res.data.token
-      // setToken(token)
       return res
     })
     .catch(res => {
@@ -29,22 +26,4 @@ export function login({ email, password }) {
         return res
       }
     })
-}
-
-export function signOut() {
-  setToken(null);
-  if (getDecodedToken() === null) return true;
-  return false;
-}
-
-
-export function checkAccess(rule = undefined) {
-  const decodedToken = getDecodedToken()
-  
-  if (decodedToken && decodedToken.role === rule)
-    return true
-  else if (decodedToken && !rule) //quando nao informado a regra valida apenas se estar autenticado
-    return true
-  else
-    return false
 }

@@ -8,7 +8,7 @@ import storage from 'redux-persist/lib/storage'
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistConfig = {
-  key: '@storejs:',
+  key: '@storejs',
   storage,
 }
 
