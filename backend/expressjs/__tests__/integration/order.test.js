@@ -3,21 +3,22 @@ const request = require("supertest");
 const app = require("../../src/app");
 const truncate = require("../utils/truncate");
 const factory = require("../factories");
+const random = require("../utils/random")
 
 describe("Order", () => {
 
-  generateOrder = async (qtd) => {
+  generateOrders = async (qtd) => {
     let user, order = null
 
-    const product = await factory.create("Product");
+    for (let i = 0; i < qtd; i++) {
+      user = await factory.user();
 
-    for(let i=0; i<qtd; i++){
-      user = await factory.create("User");
-      console.log(user.email) //email duplicado
-  
-      order = await factory.create("Order", {
-        userId: user.id
-      });
+      const rand = random(1, 5)
+      for (let j = 0; j < rand; j++) {
+        order = await factory.order({
+          userId: user.id
+        });
+      }
     }
 
     const token = await user.generateToken()
@@ -26,18 +27,24 @@ describe("Order", () => {
   }
 
   beforeEach(async () => {
-    await truncate();
+    //await truncate();
   });
 
   it("should be able to list orders when authenticated", async () => {
-    user = await factory.create("User");
-    const token = await user.generateToken()
+    const { user, order, token } = await generateOrders(3)
 
     const response = await request(app)
       .get(`${process.env.APP_URI}/orders`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
+
+    for (let body of response.body) {
+      expect([body])
+        .toContainEqual(
+          expect.objectContaining({ userId: user.id })
+        );
+    }
   });
 
   it("should not be able to list orders without jwt token", async () => {
@@ -55,17 +62,17 @@ describe("Order", () => {
   });
 
   it("should be able to show order when authenticated", async () => {
-    const generate = await generateOrder(1)
+    const { order, token } = await generateOrders(1)
 
     const response = await request(app)
-      .get(`${process.env.APP_URI}/orders/${generate.order.id}`)
-      .set("Authorization", `Bearer ${generate.token}`);
+      .get(`${process.env.APP_URI}/orders/${order.id}`)
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
 
     expect([response.body])
       .toContainEqual(
-        expect.objectContaining({ dateOrder: generate.order.dateOrder, total: expect.anything() })
+        expect.objectContaining({ dateOrder: order.dateOrder, total: expect.anything() })
       );
   });
 });

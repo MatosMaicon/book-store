@@ -6,11 +6,11 @@ const factory = require("../factories");
 
 describe("Authentication", () => {
   beforeEach(async () => {
-    await truncate();
+    //await truncate();
   });
 
   it("should authenticate with valid credentials", async () => {
-    const user = await factory.create("User", {
+    const user = await factory.user({
       password: "123123"
     });
     
@@ -25,7 +25,7 @@ describe("Authentication", () => {
   });
 
   it("should not authenticate with invalid credentials", async () => {
-    const user = await factory.create("User", {
+    const user = await factory.user({
       password: "123123"
     });
 
@@ -51,7 +51,7 @@ describe("Authentication", () => {
   });
 
   it("should return jwt token when authenticated", async () => {
-    const user = await factory.create("User", {
+    const user = await factory.user({
       password: "123123"
     });
 
