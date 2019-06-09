@@ -36,10 +36,12 @@ class OrdersController {
         const transaction = await db.sequelize.transaction();
         try {
             const order = await Order.create(req.body, { transaction })
-            const items = req.body.items
-            for (let i = 0; items && i < items.length; i++) {
-                await Item.create({ ...items[i], orderId: order.id }, { transaction })
-            }
+
+            // bulk create, Items
+            await Item.bulkCreate(req.body.items.map(item => ({
+                ...item,
+                orderId: order.id,
+            })), { transaction });
 
             // commit
             await transaction.commit();
@@ -51,25 +53,20 @@ class OrdersController {
     }
 
     async update(req, res) {
-        const order = await Order.findByPk(req.params.id)
+        const order = await Order.findByPk( req.params.id, {include: [{ association: "items" }]})
         if (!order)
             return res.status(400).json({ message: "Order not found!" })
 
         const transaction = await db.sequelize.transaction();
         try {
-            await order.update(req.body, { transaction })
+            await order.update(req.body, { transaction })            
+            await Item.destroy({ where: { orderId: order.id }, transaction })
 
-            //Update Items
-            const items = req.body.items
-            for (let i = 0; items && i < items.length; i++) {
-                const modelItem = await Item.findOne({ where: { orderId: order.id, productId: items[i].productId } })
-
-                if (!modelItem) {
-                    await Item.create({ ...items[i], orderId: order.id }, { transaction })
-                } else {
-                    await modelItem.update(items[i], { transaction })
-                }
-            }
+            // bulk create, Items
+            await Item.bulkCreate(req.body.items.map(item => ({
+                ...item,
+                orderId: order.id,
+            })), { transaction });
 
             // commit
             await transaction.commit();
