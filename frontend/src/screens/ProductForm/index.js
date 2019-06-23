@@ -21,12 +21,12 @@ const schema = Yup.object().shape({
     .notOneOf(['livro', 'book'], 'Esse nome não pode camarada!'),
   price: Yup.number().required('Informe o preço!'),
   description: Yup.string().required('Informe uma descrição!'),
-  image: Yup.string().required('Informe uma foto de capa!'),
+  image: Yup.mixed().when('id', {is: null, then: Yup.mixed().required('Informe uma foto de capa!')}),
   active: Yup.boolean().required('Informe se ativo ou inativo!')
 })
 
 const enhanceWithFormik = withFormik({
-  mapPropsToValues: () => ({ id: null, name: '', description: '', price: 0, image: '', active: true }),
+  mapPropsToValues: () => ({ id: null, name: '', description: '', price: 0, image: null, active: true }),
   handleSubmit: async (values, bag) => {
     await api.save(values, values.id)
       .then(resp => {

@@ -6,6 +6,7 @@ class ProductsController {
     async index(req, res) {
         try {
             const products = await Product.findAll({
+                where: {active: true}
                 //attributes: ['name', 'description', 'price', 'active','image']
             })
 
@@ -37,7 +38,7 @@ class ProductsController {
     async update(req, res){
         const product = await Product.findByPk(req.params.id)
         if(product === null){
-            return res.status(400).json({message: "Livro not found!"})
+            return res.status(400).json({message: "Product not found!"})
         }
         
         try{
@@ -49,6 +50,8 @@ class ProductsController {
                 });
 
                 attributes = {...attributes, image: req.file.filename}
+            }else{
+                delete attributes.image;
             }
 
             await product.update(attributes)
