@@ -51,50 +51,6 @@
             "bearer": []
           }
         ]
-      },
-      "post": {
-        "operationId": "IrpfStatementController_createIrpf",
-        "summary": "Visible for customers.",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateIrpfStatementDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IrpfStatementDTO"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "tags": [
-          "irpf-statements"
-        ],
-        "security": [
-          {
-            "bearer": []
-          }
-        ]
       }
     },
     "/api/v1/irpf-statements/{id}": {
